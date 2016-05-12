@@ -361,7 +361,7 @@ public class HomeActivity extends FragmentActivity {
     }
 
     private void loadTopUp() {
-        TopUpFragment topUpFragment = new TopUpFragment();
+        TopUpListFragment topUpFragment = new TopUpListFragment();
 
         // fragment transitions
         // Replace whatever is in the fragment_container view with this fragment,

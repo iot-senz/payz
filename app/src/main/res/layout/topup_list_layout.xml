@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#fff"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:layout_margin="10dp"
+        android:orientation="vertical" >
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:id="@+id/transaction_layout"
+            android:background="@drawable/app_button_selector"
+            android:layout_height="fill_parent"
+            android:layout_margin="10dp"
+            android:clickable="true"
+            android:layout_weight="1">
+            <TextView
+                android:layout_width="40dp"
+                android:id="@+id/transaction_icon"
+                android:layout_height="40dp"
+                android:layout_marginLeft="20dp"
+                android:gravity="center"
+                android:visibility="gone"
+                android:text="$"
+                android:textColor="#fff"
+                android:textSize="30sp"
+                android:layout_alignParentLeft="true"
+                android:background="@drawable/circle_shape_blue"
+                android:layout_centerVertical="true"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:textSize="35sp"
+                android:layout_marginLeft="38dp"
+                android:layout_centerInParent="true"
+                android:id="@+id/doller10"
+                android:layout_toRightOf="@+id/transaction_icon"
+                android:text="10$"
+                android:textColor="#764295"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:id="@+id/summary_layout"
+            android:background="@drawable/app_button_selector"
+            android:layout_height="fill_parent"
+            android:layout_margin="10dp"
+            android:clickable="true"
+            android:layout_weight="1">
+            <TextView
+                android:layout_width="40dp"
+                android:id="@+id/summary_icon"
+                android:layout_height="40dp"
+                android:layout_marginLeft="20dp"
+                android:gravity="center"
+                android:text="%"
+                android:visibility="gone"
+                android:textColor="#fff"
+                android:textSize="30sp"
+                android:layout_alignParentLeft="true"
+                android:background="@drawable/circle_shape_blue"
+                android:layout_centerVertical="true"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:textSize="35sp"
+                android:layout_marginLeft="38dp"
+                android:layout_centerInParent="true"
+                android:id="@+id/doller20"
+                android:layout_toRightOf="@+id/summary_icon"
+                android:text="20$"
+                android:textColor="#764295"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:id="@+id/settings_layout"
+            android:clickable="true"
+            android:background="@drawable/app_button_selector"
+            android:layout_height="fill_parent"
+            android:layout_margin="10dp"
+            android:layout_weight="1">
+            <TextView
+                android:layout_width="40dp"
+                android:id="@+id/settings_icon"
+                android:layout_height="40dp"
+                android:layout_marginLeft="20dp"
+                android:gravity="center"
+                android:text="!"
+                android:textColor="#fff"
+                android:textSize="30sp"
+                android:visibility="gone"
+                android:layout_alignParentLeft="true"
+                android:background="@drawable/circle_shape_blue"
+                android:layout_centerVertical="true"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:textSize="35sp"
+                android:layout_marginLeft="38dp"
+                android:layout_centerInParent="true"
+                android:id="@+id/doller50"
+                android:layout_toRightOf="@+id/settings_icon"
+                android:text="50$"
+                android:textColor="#764295"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:id="@+id/transaction_layout1"
+            android:background="@drawable/app_button_selector"
+            android:layout_height="fill_parent"
+            android:layout_margin="10dp"
+            android:clickable="true"
+            android:layout_weight="1">
+            <TextView
+                android:layout_width="40dp"
+                android:id="@+id/transaction_icon1"
+                android:layout_height="40dp"
+                android:layout_marginLeft="20dp"
+                android:gravity="center"
+                android:text="$"
+                android:visibility="gone"
+                android:textColor="#fff"
+                android:textSize="30sp"
+                android:layout_alignParentLeft="true"
+                android:background="@drawable/circle_shape_blue"
+                android:layout_centerVertical="true"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:textSize="35sp"
+                android:layout_marginLeft="38dp"
+                android:layout_centerInParent="true"
+                android:id="@+id/doller100"
+                android:layout_toRightOf="@+id/transaction_icon1"
+                android:text="100$"
+                android:textColor="#764295"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:id="@+id/transaction_layout2"
+            android:background="@drawable/app_button_selector"
+            android:layout_height="fill_parent"
+            android:layout_margin="10dp"
+            android:clickable="true"
+            android:layout_weight="1">
+            <TextView
+                android:layout_width="40dp"
+                android:id="@+id/transaction_icon2"
+                android:layout_height="40dp"
+                android:layout_marginLeft="20dp"
+                android:gravity="center"
+                android:text="$"
+                android:visibility="gone"
+                android:textColor="#fff"
+                android:textSize="30sp"
+                android:layout_alignParentLeft="true"
+                android:background="@drawable/circle_shape_blue"
+                android:layout_centerVertical="true"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:textSize="35sp"
+                android:layout_marginLeft="38dp"
+                android:layout_centerInParent="true"
+                android:id="@+id/doller200"
+                android:layout_toRightOf="@+id/transaction_icon2"
+                android:text="200$"
+                android:textColor="#764295"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
