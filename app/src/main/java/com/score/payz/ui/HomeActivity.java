@@ -225,7 +225,7 @@ public class HomeActivity extends FragmentActivity {
         // need to determine selected item according to the currently selected sensor type
         drawerItemList = new ArrayList();
         drawerItemList.add(new DrawerItem("$ PayZ", "#5f82c3", R.drawable.drawer_list_row_selector, R.drawable.drawer_list_row_selector, true));
-        drawerItemList.add(new DrawerItem("$ Top Up", "#764295", R.drawable.drawer_list_row_selector, R.drawable.drawer_list_row_selector, false));
+        drawerItemList.add(new DrawerItem("$ Top Up", "#b5c976", R.drawable.drawer_list_row_selector, R.drawable.drawer_list_row_selector, false));
         drawerItemList.add(new DrawerItem("$ History", "#d26c6c", R.drawable.drawer_list_row_selector, R.drawable.drawer_list_row_selector, false));
         drawerItemList.add(new DrawerItem("$ Settings", "#5f82c3", R.drawable.drawer_list_row_selector, R.drawable.drawer_list_row_selector, false));
 

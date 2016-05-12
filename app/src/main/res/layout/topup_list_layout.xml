@@ -41,7 +41,7 @@
                 android:id="@+id/doller10"
                 android:layout_toRightOf="@+id/transaction_icon"
                 android:text="10$"
-                android:textColor="#764295"
+                android:textColor="#b5c976"
                 android:layout_height="wrap_content" />
         </RelativeLayout>
 
@@ -74,7 +74,7 @@
                 android:id="@+id/doller20"
                 android:layout_toRightOf="@+id/summary_icon"
                 android:text="20$"
-                android:textColor="#764295"
+                android:textColor="#b5c976"
                 android:layout_height="wrap_content" />
         </RelativeLayout>
 
@@ -108,7 +108,7 @@
                 android:id="@+id/doller50"
                 android:layout_toRightOf="@+id/settings_icon"
                 android:text="50$"
-                android:textColor="#764295"
+                android:textColor="#b5c976"
                 android:layout_height="wrap_content" />
         </RelativeLayout>
 
@@ -142,7 +142,7 @@
                 android:id="@+id/doller100"
                 android:layout_toRightOf="@+id/transaction_icon1"
                 android:text="100$"
-                android:textColor="#764295"
+                android:textColor="#b5c976"
                 android:layout_height="wrap_content" />
         </RelativeLayout>
 
@@ -175,7 +175,7 @@
                 android:id="@+id/doller200"
                 android:layout_toRightOf="@+id/transaction_icon2"
                 android:text="200$"
-                android:textColor="#764295"
+                android:textColor="#b5c976"
                 android:layout_height="wrap_content" />
         </RelativeLayout>
 

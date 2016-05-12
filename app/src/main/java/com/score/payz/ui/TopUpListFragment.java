@@ -80,7 +80,7 @@ public class TopUpListFragment extends android.support.v4.app.Fragment {
         final ActionBar actionBar = getActivity().getActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setTitle("Top Up");
-        actionBar.setBackgroundDrawable(new ColorDrawable(0xff764295));
+        actionBar.setBackgroundDrawable(new ColorDrawable(0xffb5c976));
 
         // set custom font for
         //  1. action bar title
