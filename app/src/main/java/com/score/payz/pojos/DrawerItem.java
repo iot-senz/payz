@@ -11,13 +11,15 @@ public class DrawerItem {
     int resourceId;
     int selectedResourceId;
     boolean isSelected;
+    boolean isVisibleDesc;
 
-    public DrawerItem(String name, String color, int resourceId, int selectedResourceId, boolean isSelected) {
+    public DrawerItem(String name, String color, int resourceId, int selectedResourceId, boolean isSelected, boolean isVisibleDesc) {
         this.name = name;
         this.color = color;
         this.resourceId = resourceId;
         this.selectedResourceId = selectedResourceId;
         this.isSelected = isSelected;
+        this.isVisibleDesc = isVisibleDesc;
     }
 
     public String getName() {
@@ -58,5 +60,13 @@ public class DrawerItem {
 
     public void setSelected(boolean selected) {
         isSelected = selected;
+    }
+
+    public boolean isVisibleDesc() {
+        return isVisibleDesc;
+    }
+
+    public void setIsVisibleDesc(boolean isVisibleDesc) {
+        this.isVisibleDesc = isVisibleDesc;
     }
 }

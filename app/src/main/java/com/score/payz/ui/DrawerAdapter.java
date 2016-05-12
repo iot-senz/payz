@@ -100,6 +100,13 @@ public class DrawerAdapter extends BaseAdapter {
             holder = new ViewHolder();
             holder.imageView = (ImageView) view.findViewById(R.id.menurow_icon);
             holder.name = (TextView) view.findViewById(R.id.menurow_title);
+            holder.desc = (TextView) view.findViewById(R.id.menurow_desc);
+
+            if (item.isVisibleDesc()) {
+                holder.desc.setVisibility(View.VISIBLE);
+            } else {
+                holder.desc.setVisibility(View.GONE);
+            }
 
             view.setTag(holder);
         } else {
@@ -111,6 +118,9 @@ public class DrawerAdapter extends BaseAdapter {
             holder.imageView.setImageResource(item.getSelectedResourceId());
             holder.name.setTextColor(Color.parseColor(item.getColor()));
             holder.name.setTypeface(face, Typeface.BOLD);
+
+            holder.desc.setTextColor(Color.parseColor(item.getColor()));
+            holder.desc.setTypeface(face, Typeface.BOLD);
         } else {
             holder.imageView.setImageResource(item.getResourceId());
             holder.name.setTextColor(Color.parseColor("#6d6d6d"));
@@ -129,5 +139,6 @@ public class DrawerAdapter extends BaseAdapter {
     static class ViewHolder {
         ImageView imageView;
         TextView name;
+        TextView desc;
     }
 }
