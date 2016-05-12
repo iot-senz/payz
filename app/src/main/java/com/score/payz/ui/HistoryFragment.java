@@ -11,7 +11,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.score.payz.R;
+import com.score.payz.db.SenzorsDbSource;
 import com.score.payz.pojos.History;
+import com.score.payz.pojos.Pay;
 
 import java.util.ArrayList;
 
@@ -97,15 +99,18 @@ public class HistoryFragment extends android.support.v4.app.Fragment {
      * Initialize friend list view
      */
     private void initFriendListView() {
-        historyListView = (ListView) getActivity().findViewById(R.id.list_view);
+
+        historyListView = (ListView)getActivity().findViewById(R.id.list_view);
+
+        //pop up temporary list
+        ArrayList<Pay> payList = new SenzorsDbSource(this.getActivity()).getAllPays();
 
         // pop up temporary list
         ArrayList<History> historyList = new ArrayList<>();
-        historyList.add(new History("Lunch @cafe 1", "10.4$"));
-        historyList.add(new History("Breakfast @Mac", "15$"));
-        historyList.add(new History("Starbug", "5.50$"));
-        historyList.add(new History("Dinner @cafe2", "15.10$"));
-        historyList.add(new History("Coffee", "2.50$"));
+
+        for (Pay p:payList) {
+            historyList.add(new History(p.getShopName(), Double.toString(p.getPayAmount())));
+        }
 
         historyListAdapter = new HistoryListAdapter(this, historyList);
         historyListView.setAdapter(historyListAdapter);

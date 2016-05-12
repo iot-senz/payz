@@ -338,6 +338,17 @@ public class HomeActivity extends FragmentActivity {
     /**
      * Load my sensor list fragment
      */
+    private void loadPay() {
+        PayzFragment payzFragment = new PayzFragment();
+
+        // fragment transitions
+        // Replace whatever is in the fragment_container view with this fragment,
+        // and add the transaction to the back stack so the user can navigate back
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.main, payzFragment);
+        transaction.commit();
+    }
+
     private void loadPayz() {
         PayzFragment payzFragment = new PayzFragment();
 
