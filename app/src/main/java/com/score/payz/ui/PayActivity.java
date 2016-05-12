@@ -300,7 +300,7 @@ public class PayActivity extends Activity implements View.OnClickListener{
             // initialize transaction
             pay = new Pay(1, "shop abc", "shop01", "inv0001", amount, PayUtils.getCurrentTime().toString());
 
-            //new SenzorsDbSource(TransactionActivity.this).createTransaction(transaction);
+            new SenzorsDbSource(PayActivity.this).createPay(pay);
             //navigateTransactionDetails(transaction);
             if (NetworkUtil.isAvailableNetwork(this)) {
                 displayInformationMessageDialog("Are you sure you want to do the transaction " + /* #Account " + /*pay.getClientAccountNo() +*/ " #Amount " + pay.getPayAmount());
@@ -328,7 +328,7 @@ public class PayActivity extends Activity implements View.OnClickListener{
         String id = "_ID";
         String signature = "_SIGNATURE";
         SenzTypeEnum senzType = SenzTypeEnum.PUT;
-        User receiver = new User("", "payzbankz");
+        User receiver = new User("", "payzbank");
 
         return new Senz(id, signature, senzType, null, receiver, senzAttributes);
     }

@@ -6,9 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
-//import com.score.payz.pojos.Summary;
-//import com.score.payz.pojos.Transaction;
-
+import com.score.payz.pojos.Summary;
 import com.score.payz.pojos.Pay;
 
 import java.text.SimpleDateFormat;
@@ -42,25 +40,23 @@ public class SenzorsDbSource {
 
     }
 
-    /*public ArrayList<Transaction> getAllTransactions() {
-        ArrayList<Transaction> sensorList = new ArrayList();
+    public ArrayList<Pay> getAllPays() {
+        ArrayList<Pay> sensorList = new ArrayList();
 
         SQLiteDatabase db = SenzorsDbHelper.getInstance(context).getReadableDatabase();
 
         // join query to retrieve data
         String query = "SELECT * " +
-                "FROM " + SenzorsDbContract.Transaction.TABLE_NAME;
+                "FROM " + SenzorsDbContract.Pay.TABLE_NAME;
 
         Cursor cursor = db.rawQuery(query, null);
-// sensor/user attributes
+        // sensor/user attributes
         int id;
-        String clientName;
-        String clientNic;
-        String clientAccountNo;
-        String previousBalance;
-        int transactionAmount;
-        String transactionTime;
-        String transactionType;
+        String shopName;
+        String shopNo;
+        String invoiceNumber;
+        double payAmount;
+        String payTime;
         Log.e(TAG, cursor.getCount() + "f");
         // extract attributes
         while (cursor.moveToNext()) {
@@ -68,41 +64,32 @@ public class SenzorsDbSource {
 
             // get senz attributes
 
-            id = cursor.getInt(cursor.getColumnIndex(SenzorsDbContract.Transaction._ID));
+            id = cursor.getInt(cursor.getColumnIndex(SenzorsDbContract.Pay._ID));
 
-            clientName = cursor.getString(cursor.getColumnIndex(SenzorsDbContract.Transaction.COLUMN_NAME_CLIENTNAME));
+            shopName = cursor.getString(cursor.getColumnIndex(SenzorsDbContract.Pay.COLUMN_NAME_shopName));
 
-            clientAccountNo = cursor.getString(cursor.getColumnIndex(SenzorsDbContract.Transaction.COLUMN_NAME_clientAccountNo));
+            shopNo = cursor.getString(cursor.getColumnIndex(SenzorsDbContract.Pay.COLUMN_NAME_shopNo));
 
-            previousBalance = cursor.getString(cursor.getColumnIndex(SenzorsDbContract.Transaction.COLUMN_NAME_previousBalance));
+            invoiceNumber = cursor.getString(cursor.getColumnIndex(SenzorsDbContract.Pay.COLUMN_NAME_invoiceNumber));
 
-            transactionAmount = cursor.getInt(cursor.getColumnIndex(SenzorsDbContract.Transaction.COLUMN_NAME_transactionAmount));
+            payAmount = cursor.getInt(cursor.getColumnIndex(SenzorsDbContract.Pay.COLUMN_NAME_payAmount));
 
-            transactionTime = cursor.getString(cursor.getColumnIndex(SenzorsDbContract.Transaction.COLUMN_NAME_transactionTime));
+            payTime = cursor.getString(cursor.getColumnIndex(SenzorsDbContract.Pay.COLUMN_NAME_payTime));
 
-            transactionType = cursor.getString(cursor.getColumnIndex(SenzorsDbContract.Transaction.COLUMN_NAME_transactionType));
-
-            clientNic = cursor.getString(cursor.getColumnIndex(SenzorsDbContract.Transaction.COLUMN_NAME_clientNIC));
-            System.out.println(id + " " + clientName + " " + clientAccountNo + " " + previousBalance + " " + transactionAmount + " " + transactionTime + " " + transactionType);
-            Transaction transaction = new Transaction(id, clientName, clientNic, clientAccountNo, previousBalance, transactionAmount, transactionTime, transactionType);
+            System.out.println(id + " " + shopName + " " + shopNo + " " + invoiceNumber + " " + payAmount + " " + payTime);
+            Pay pay = new Pay(id, shopName, shopNo, invoiceNumber, payAmount, payTime);
             //senzAttributes.put(_senzName, _senzValue);
 
-*//*
-
-            Log.d(TAG,cursor.getColumnIndex(SenzorsDbContract.Transaction.COLUMN_NAME_ID)+"");
-            Log.d(TAG,cursor.getColumnIndex(SenzorsDbContract.Transaction.COLUMN_NAME_previousBalance)+"");
-            Log.d(TAG,cursor.getColumnIndex(SenzorsDbContract.Transaction.COLUMN_NAME_transactionTime)+"");
-            Log.d(TAG,cursor.getColumnIndex(SenzorsDbContract.Transaction.COLUMN_NAME_transactionType)+"");
-            Log.d(TAG,cursor.getColumnIndex(SenzorsDbContract.Transaction.COLUMN_NAME_clientAccountNo)+"");
-            Log.d(TAG,cursor.getColumnIndex(SenzorsDbContract.Transaction.COLUMN_NAME_CLIENTNAME)+"");
-            Log.d(TAG,cursor.getColumnIndex(SenzorsDbContract.Transaction.COLUMN_NAME_clientNIC)+"");
-            Log.d(TAG,cursor.getColumnIndex(SenzorsDbContract.Transaction.COLUMN_NAME_transactionAmount)+"");
-
-*//*
+            Log.d(TAG,cursor.getColumnIndex(SenzorsDbContract.Pay._ID)+"");
+            Log.d(TAG,cursor.getColumnIndex(SenzorsDbContract.Pay.COLUMN_NAME_shopName)+"");
+            Log.d(TAG,cursor.getColumnIndex(SenzorsDbContract.Pay.COLUMN_NAME_shopNo)+"");
+            Log.d(TAG,cursor.getColumnIndex(SenzorsDbContract.Pay.COLUMN_NAME_invoiceNumber)+"");
+            Log.d(TAG,cursor.getColumnIndex(SenzorsDbContract.Pay.COLUMN_NAME_payAmount)+"");
+            Log.d(TAG,cursor.getColumnIndex(SenzorsDbContract.Pay.COLUMN_NAME_payTime)+"");
 
             // fill senz list
             System.out.println("Done in Create object");
-            sensorList.add(transaction);
+            sensorList.add(pay);
         }
 
         // clean
@@ -112,7 +99,7 @@ public class SenzorsDbSource {
 
         return sensorList;
 
-    }*/
+    }
 
     public void clearTable() {
         SQLiteDatabase db = SenzorsDbHelper.getInstance(context).getWritableDatabase();
@@ -121,12 +108,12 @@ public class SenzorsDbSource {
 
         db.close();
     }
-/*
+
 
     public Summary getSummeryAmmount(){
         SQLiteDatabase db = SenzorsDbHelper.getInstance(context).getWritableDatabase();
-        String query = "SELECT COUNT("+SenzorsDbContract.Transaction._ID+") AS trcount, SUM("+SenzorsDbContract.Transaction.COLUMN_NAME_transactionAmount+") AS total" +
-                " FROM " +SenzorsDbContract.Transaction.TABLE_NAME;
+        String query = "SELECT COUNT("+SenzorsDbContract.Pay._ID+") AS trcount, SUM("+SenzorsDbContract.Pay.COLUMN_NAME_payAmount+") AS total" +
+                " FROM " +SenzorsDbContract.Pay.TABLE_NAME;
         Log.e(TAG,query);
         Cursor cursor = db.rawQuery(query, null);
         int tcount;
@@ -153,6 +140,4 @@ public class SenzorsDbSource {
 
         return tempsum;
     }
-*/
-
 }
