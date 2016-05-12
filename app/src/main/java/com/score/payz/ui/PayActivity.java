@@ -221,18 +221,18 @@ public class PayActivity extends Activity implements View.OnClickListener{
 
         clickToPay = (TextView) findViewById(R.id.click_to_pay);
         payAmountText = (TextView) findViewById(R.id.pay_amount_text);
-        acceptText = (TextView) findViewById(R.id.accept_text);
+        //acceptText = (TextView) findViewById(R.id.accept_text);
         rejectText = (TextView) findViewById(R.id.reject_text);
 
         cancel = (RelativeLayout) findViewById(R.id.sign_in_button_panel);
-        accept = (RelativeLayout) findViewById(R.id.accept_button);
+        //accept = (RelativeLayout) findViewById(R.id.accept_button);
 
         cancel.setOnClickListener(PayActivity.this);
-        accept.setOnClickListener(PayActivity.this);
+        //accept.setOnClickListener(PayActivity.this);
 
         clickToPay.setTypeface(typeface, Typeface.NORMAL);
-        payAmountText.setTypeface(typeface, Typeface.NORMAL);
-        acceptText.setTypeface(typeface, Typeface.BOLD);
+        payAmountText.setTypeface(typeface, Typeface.BOLD);
+        //acceptText.setTypeface(typeface, Typeface.BOLD);
         rejectText.setTypeface(typeface, Typeface.BOLD);
 
 
