@@ -1,12 +1,14 @@
 package com.score.payz.ui;
 
 import android.app.ActionBar;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.score.payz.R;
@@ -17,7 +19,7 @@ import com.score.payz.R;
  *
  * @author erangaeb@gmail.com (eranga herath)
  */
-public class TopUpListFragment extends android.support.v4.app.Fragment {
+public class TopUpListFragment extends android.support.v4.app.Fragment implements View.OnClickListener {
 
     private static final String TAG = TopUpFragment.class.getName();
 
@@ -30,6 +32,7 @@ public class TopUpListFragment extends android.support.v4.app.Fragment {
     private TextView doller100;
     private TextView doller200;
 
+    private RelativeLayout doller10Button;
 
     /**
      * {@inheritDoc}
@@ -46,6 +49,10 @@ public class TopUpListFragment extends android.support.v4.app.Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         ViewGroup root = (ViewGroup) inflater.inflate(R.layout.topup_list_layout, container, false);
+
+//        View v = inflater.inflate(R.layout.topup_list_layout, container, false);
+//        doller10 = (TextView)v.findViewById(R.id.doller10);
+//        doller10.setOnClickListener(TopUpListFragment.this);
 
         return root;
     }
@@ -96,6 +103,9 @@ public class TopUpListFragment extends android.support.v4.app.Fragment {
         doller100 = (TextView) getActivity().findViewById(R.id.doller100);
         doller200 = (TextView) getActivity().findViewById(R.id.doller200);
 
+        doller10Button = (RelativeLayout) getActivity().findViewById(R.id.doller10Button);
+        doller10Button.setOnClickListener(TopUpListFragment.this);
+
         doller10.setTypeface(typeface, Typeface.BOLD);
         doller20.setTypeface(typeface, Typeface.BOLD);
         doller50.setTypeface(typeface, Typeface.BOLD);
@@ -103,4 +113,13 @@ public class TopUpListFragment extends android.support.v4.app.Fragment {
         doller200.setTypeface(typeface, Typeface.BOLD);
     }
 
+    @Override
+    public void onClick(View v) {
+
+        if (v == doller10Button) {
+            Intent mapIntent = new Intent(this.getActivity(), TopUpActivity.class);
+            startActivity(mapIntent);
+            this.getActivity().overridePendingTransition(R.anim.bottom_in, R.anim.stay_in);
+        }
+    }
 }

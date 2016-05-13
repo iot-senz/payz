@@ -14,7 +14,7 @@
 
         <RelativeLayout
             android:layout_width="fill_parent"
-            android:id="@+id/transaction_layout"
+            android:id="@+id/doller10Button"
             android:background="@drawable/app_button_selector"
             android:layout_height="fill_parent"
             android:layout_margin="10dp"
