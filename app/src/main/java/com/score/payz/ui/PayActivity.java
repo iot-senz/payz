@@ -28,25 +28,25 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.score.payz.R;
+import com.score.payz.db.SenzorsDbSource;
+import com.score.payz.exceptions.InvalidAccountException;
+import com.score.payz.exceptions.InvalidInputFieldsException;
+import com.score.payz.pojos.Pay;
+import com.score.payz.utils.ActivityUtils;
+import com.score.payz.utils.NetworkUtil;
 import com.score.payz.utils.PayUtils;
 import com.score.senz.ISenzService;
 import com.score.senzc.enums.SenzTypeEnum;
 import com.score.senzc.pojos.Senz;
-
-import com.score.payz.db.SenzorsDbSource;
-import com.score.payz.exceptions.InvalidAccountException;
-import com.score.payz.exceptions.InvalidInputFieldsException;
-//import com.wasn.pojos.BalanceQuery;
-import com.score.payz.pojos.Pay;
-import com.score.payz.utils.ActivityUtils;
-import com.score.payz.utils.NetworkUtil;
 import com.score.senzc.pojos.User;
-//import com.wasn.utils.TransactionUtils;
 
 import java.util.HashMap;
 
+//import com.wasn.pojos.BalanceQuery;
+//import com.wasn.utils.TransactionUtils;
 
-public class PayActivity extends Activity implements View.OnClickListener{
+
+public class PayActivity extends Activity implements View.OnClickListener {
 
     private static final String TAG = PayActivity.class.getName();
 
@@ -294,7 +294,7 @@ public class PayActivity extends Activity implements View.OnClickListener{
 
         try {
             String account = "ttl";//accountEditText.getText().toString().trim();
-            double amount = Double.parseDouble(payAmountText.getText().toString().trim());
+            double amount = Double.parseDouble(payAmountText.getText().toString().replace("$", "").trim());
             ActivityUtils.isValidPayFields(account, amount);
 
             // initialize transaction

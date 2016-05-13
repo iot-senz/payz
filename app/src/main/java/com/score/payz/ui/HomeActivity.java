@@ -32,6 +32,9 @@ import com.github.siyamed.shapeimageview.CircularImageView;
 import com.score.payz.R;
 import com.score.payz.pojos.DrawerItem;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 
 /**
@@ -123,15 +126,26 @@ public class HomeActivity extends FragmentActivity {
         Parcelable[] data = intent.getParcelableArrayExtra(NfcAdapter.EXTRA_NDEF_MESSAGES);
         if (data != null) {
             NdefMessage message = (NdefMessage) data[0];
-            String amount = new String(message.getRecords()[0].getPayload());
-            Log.d(TAG, "----------------- " + amount);
+            String json = new String(message.getRecords()[0].getPayload());
 
-            // launch pay activity
-            Intent mapIntent = new Intent(this, PayActivity.class);
-            mapIntent.putExtra("EXTRA", amount);
-            startActivity(mapIntent);
-            overridePendingTransition(R.anim.bottom_in, R.anim.stay_in);
+            // TODO move to utils
+            JSONObject jsonObject = null;
+            try {
+                jsonObject = new JSONObject(json);
 
+                String acc = jsonObject.getString("acc");
+                String amnt = jsonObject.getString("amnt");
+
+                Log.d(TAG, "----------------- " + json);
+
+                // launch pay activity
+                Intent mapIntent = new Intent(this, PayActivity.class);
+                mapIntent.putExtra("EXTRA", amnt);
+                startActivity(mapIntent);
+                overridePendingTransition(R.anim.bottom_in, R.anim.stay_in);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         }
     }
 
