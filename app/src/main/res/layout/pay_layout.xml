@@ -63,7 +63,7 @@
                         android:layout_centerHorizontal="true"
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="15dp"
-                        android:text="$20.00"
+                        android:text="20.00"
                         android:textColor="#ffffff"
                         android:textSize="50sp"></TextView>
 

@@ -225,10 +225,10 @@ public class PayActivity extends Activity implements View.OnClickListener{
         rejectText = (TextView) findViewById(R.id.reject_text);
 
         cancel = (RelativeLayout) findViewById(R.id.sign_in_button_panel);
-        //accept = (RelativeLayout) findViewById(R.id.accept_button);
+        accept = (RelativeLayout) findViewById(R.id.pay_amount_relative_layout);
 
         cancel.setOnClickListener(PayActivity.this);
-        //accept.setOnClickListener(PayActivity.this);
+        accept.setOnClickListener(PayActivity.this);
 
         clickToPay.setTypeface(typeface, Typeface.NORMAL);
         payAmountText.setTypeface(typeface, Typeface.BOLD);
@@ -293,12 +293,12 @@ public class PayActivity extends Activity implements View.OnClickListener{
         ActivityUtils.hideSoftKeyboard(this);
 
         try {
-            String account = "shop01";//accountEditText.getText().toString().trim();
-            double amount = 100;//Integer.parseInt(amountEditText.getText().toString().trim());
+            String account = "ttl";//accountEditText.getText().toString().trim();
+            double amount = Double.parseDouble(payAmountText.getText().toString().trim());
             ActivityUtils.isValidPayFields(account, amount);
 
             // initialize transaction
-            pay = new Pay(1, "shop abc", "shop01", "inv0001", amount, PayUtils.getCurrentTime().toString());
+            pay = new Pay(1, "shop abc", account, "inv0001", amount, PayUtils.getCurrentTime().toString());
 
             new SenzorsDbSource(PayActivity.this).createPay(pay);
             //navigateTransactionDetails(transaction);
