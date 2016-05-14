@@ -411,9 +411,6 @@ public class PayActivity extends Activity implements View.OnClickListener {
                     // save transaction in db
                     if (pay != null)
                         new SenzorsDbSource(PayActivity.this).createPay(pay);
-
-                    // navigate
-                    navigatePayDetails(pay);
                 } else {
                     String informationMessage = "Failed to complete the payment";
                     displayMessageDialog("PUT fail", informationMessage);
@@ -516,16 +513,6 @@ public class PayActivity extends Activity implements View.OnClickListener {
         });
 
         dialog.show();
-    }
-
-    private void navigatePayDetails(Pay pay) {
-        // navigate to transaction details
-        Intent intent = new Intent(PayActivity.this, PayDetailsActivity.class);
-        intent.putExtra("pay", pay);
-        intent.putExtra("ACTIVITY_NAME", PayActivity.class.getName());
-        startActivity(intent);
-
-        PayActivity.this.finish();
     }
 
 }
