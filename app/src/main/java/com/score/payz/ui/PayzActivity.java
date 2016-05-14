@@ -161,10 +161,10 @@ public class PayzActivity extends Activity implements View.OnClickListener {
             pay = bundle.getParcelable("EXTRA");
 
             if (pay != null) {
-                Log.i(TAG, "Pay account :" + pay.getShopName());
-                Log.i(TAG, "Pay amount :" + pay.getPayAmount());
+                Log.i(TAG, "Pay account :" + pay.getAccount());
+                Log.i(TAG, "Pay amount :" + pay.getAmount());
 
-                payAmountText.setText("$" + pay.getPayAmount());
+                payAmountText.setText("$" + pay.getAmount());
             }
         }
     }
@@ -192,7 +192,7 @@ public class PayzActivity extends Activity implements View.OnClickListener {
         ActivityUtils.hideSoftKeyboard(this);
 
         if (NetworkUtil.isAvailableNetwork(this)) {
-            displayInformationMessageDialog("Are you sure you want to pay" + " #Amount " + pay.getPayAmount());
+            displayInformationMessageDialog("Are you sure you want to pay" + " #Amount " + pay.getAmount());
         } else {
             displayMessageDialog("#ERROR", "No network connection");
         }
@@ -282,7 +282,7 @@ public class PayzActivity extends Activity implements View.OnClickListener {
 
                     // save transaction in db
                     if (pay != null)
-                        new SenzorsDbSource(PayzActivity.this).createPay(pay);
+                        new SenzorsDbSource(PayzActivity.this).createPayz(pay);
                 } else {
                     String informationMessage = "Failed to complete the payment";
                     displayMessageDialog("PUT fail", informationMessage);

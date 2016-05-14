@@ -4,38 +4,49 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 /**
- * Created by chathura on 5/11/16.
+ * POJO to keep pay attributes
+ *
+ * @author eranga bandara (erangaeb@gmail.com)
  */
 public class Pay implements Parcelable {
+    String account;
+    String amount;
+    String time;
 
-    int id;
-    String shopName;
-    String shopNo;
-    String invoiceNumber;
-    double payAmount;
-    String payTime;
-
-    public Pay(int id,
-               String shopName,
-               String shopNo,
-               String invoiceNumber,
-               double payAmount,
-               String payTime) {
-        this.id = id;
-        this.shopName = shopName;
-        this.shopNo = shopNo;
-        this.invoiceNumber = invoiceNumber;
-        this.payAmount = payAmount;
-        this.payTime = payTime;
+    public Pay(String account, String amount, String time) {
+        this.account = account;
+        this.amount = amount;
+        this.time = time;
     }
 
     protected Pay(Parcel in) {
-        id = in.readInt();
-        shopName = in.readString();
-        shopNo = in.readString();
-        invoiceNumber = in.readString();
-        payAmount = in.readDouble();
-        payTime = in.readString();
+        account = in.readString();
+        amount = in.readString();
+        time = in.readString();
+    }
+
+    public String getAccount() {
+        return account;
+    }
+
+    public void setAccount(String account) {
+        this.account = account;
+    }
+
+    public String getAmount() {
+        return amount;
+    }
+
+    public void setAmount(String amount) {
+        this.amount = amount;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
     }
 
     public static final Creator<Pay> CREATOR = new Creator<Pay>() {
@@ -50,54 +61,6 @@ public class Pay implements Parcelable {
         }
     };
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getShopName() {
-        return shopName;
-    }
-
-    public void setShopName(String shopName) {
-        this.shopName = shopName;
-    }
-
-    public String getShopNo() {
-        return shopNo;
-    }
-
-    public void setShopNo(String shopNo) {
-        this.shopNo = shopNo;
-    }
-
-    public String getInvoiceNumber() {
-        return invoiceNumber;
-    }
-
-    public void setInvoiceNumber(String invoiceNumber) {
-        this.invoiceNumber = invoiceNumber;
-    }
-
-    public double getPayAmount() {
-        return payAmount;
-    }
-
-    public void setPayAmount(double payAmount) {
-        this.payAmount = payAmount;
-    }
-
-    public String getPayTime() {
-        return payTime;
-    }
-
-    public void setPayTime(String payTime) {
-        this.payTime = payTime;
-    }
-
     @Override
     public int describeContents() {
         return 0;
@@ -105,11 +68,8 @@ public class Pay implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(id);
-        dest.writeString(shopName);
-        dest.writeString(shopNo);
-        dest.writeString(invoiceNumber);
-        dest.writeDouble(payAmount);
-        dest.writeString(payTime);
+        dest.writeString(account);
+        dest.writeString(amount);
+        dest.writeString(time);
     }
 }

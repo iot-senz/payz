@@ -6,138 +6,68 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
-import com.score.payz.pojos.Summary;
 import com.score.payz.pojos.Pay;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.HashMap;
+import java.util.List;
 
 /**
- * Created by root on 11/19/15.
+ * Do all database insertions, updated, deletions from here
+ *
+ * @author erangaeb@gmail.com (eranga herath)
  */
 public class SenzorsDbSource {
     private static final String TAG = SenzorsDbSource.class.getName();
     private static Context context;
 
     public SenzorsDbSource(Context context) {
-        Log.d(TAG, "Init: db source");
+        Log.i(TAG, "Init: db source");
         this.context = context;
     }
 
-    public void createPay(Pay pay) {
+    public void createPayz(Pay pay) {
+        Log.i(TAG, "Create payz with account: " + pay.getAccount() + " amount: " + pay.getAmount());
+
         SQLiteDatabase db = SenzorsDbHelper.getInstance(context).getWritableDatabase();
+
         ContentValues values = new ContentValues();
-        values.put(SenzorsDbContract.Pay.COLUMN_NAME_shopNo, pay.getShopNo());
-        values.put(SenzorsDbContract.Pay.COLUMN_NAME_shopName, pay.getShopName());
-        values.put(SenzorsDbContract.Pay.COLUMN_NAME_invoiceNumber, pay.getInvoiceNumber());
-        values.put(SenzorsDbContract.Pay.COLUMN_NAME_payAmount, pay.getPayAmount());
-        values.put(SenzorsDbContract.Pay.COLUMN_NAME_payTime, pay.getPayTime());
+        values.put(SenzorsDbContract.Pay.COLUMN_NAME_ACCOUNT, pay.getAccount());
+        values.put(SenzorsDbContract.Pay.COLUMN_NAME_AMOUNT, pay.getAmount());
+        values.put(SenzorsDbContract.Pay.COLUMN_NAME_TIME, pay.getTime());
 
-        long id = db.insert(SenzorsDbContract.Pay.TABLE_NAME, null, values);
+        db.insert(SenzorsDbContract.Pay.TABLE_NAME, null, values);
         db.close();
-
     }
 
-    public ArrayList<Pay> getAllPays() {
-        ArrayList<Pay> sensorList = new ArrayList();
+    public List<Pay> readAllPayz() {
+        Log.i(TAG, "Read payz");
+
+        List<Pay> payzList = new ArrayList<Pay>();
 
         SQLiteDatabase db = SenzorsDbHelper.getInstance(context).getReadableDatabase();
+        Cursor cursor = db.query(SenzorsDbContract.Pay.TABLE_NAME, null, null, null, null, null, null);
 
-        // join query to retrieve data
-        String query = "SELECT * " +
-                "FROM " + SenzorsDbContract.Pay.TABLE_NAME;
+        // user attributes
+        String _account;
+        String _amount;
+        String _time;
 
-        Cursor cursor = db.rawQuery(query, null);
-        // sensor/user attributes
-        int id;
-        String shopName;
-        String shopNo;
-        String invoiceNumber;
-        double payAmount;
-        String payTime;
-        Log.e(TAG, cursor.getCount() + "f");
         // extract attributes
         while (cursor.moveToNext()) {
-            HashMap<String, String> senzAttributes = new HashMap<>();
+            _account = cursor.getString(cursor.getColumnIndex(SenzorsDbContract.Pay.COLUMN_NAME_ACCOUNT));
+            _amount = cursor.getString(cursor.getColumnIndex(SenzorsDbContract.Pay.COLUMN_NAME_AMOUNT));
+            _time = cursor.getString(cursor.getColumnIndex(SenzorsDbContract.Pay.COLUMN_NAME_TIME));
 
-            // get senz attributes
-
-            id = cursor.getInt(cursor.getColumnIndex(SenzorsDbContract.Pay._ID));
-
-            shopName = cursor.getString(cursor.getColumnIndex(SenzorsDbContract.Pay.COLUMN_NAME_shopName));
-
-            shopNo = cursor.getString(cursor.getColumnIndex(SenzorsDbContract.Pay.COLUMN_NAME_shopNo));
-
-            invoiceNumber = cursor.getString(cursor.getColumnIndex(SenzorsDbContract.Pay.COLUMN_NAME_invoiceNumber));
-
-            payAmount = cursor.getInt(cursor.getColumnIndex(SenzorsDbContract.Pay.COLUMN_NAME_payAmount));
-
-            payTime = cursor.getString(cursor.getColumnIndex(SenzorsDbContract.Pay.COLUMN_NAME_payTime));
-
-            System.out.println(id + " " + shopName + " " + shopNo + " " + invoiceNumber + " " + payAmount + " " + payTime);
-            Pay pay = new Pay(id, shopName, shopNo, invoiceNumber, payAmount, payTime);
-            //senzAttributes.put(_senzName, _senzValue);
-
-            Log.d(TAG,cursor.getColumnIndex(SenzorsDbContract.Pay._ID)+"");
-            Log.d(TAG,cursor.getColumnIndex(SenzorsDbContract.Pay.COLUMN_NAME_shopName)+"");
-            Log.d(TAG,cursor.getColumnIndex(SenzorsDbContract.Pay.COLUMN_NAME_shopNo)+"");
-            Log.d(TAG,cursor.getColumnIndex(SenzorsDbContract.Pay.COLUMN_NAME_invoiceNumber)+"");
-            Log.d(TAG,cursor.getColumnIndex(SenzorsDbContract.Pay.COLUMN_NAME_payAmount)+"");
-            Log.d(TAG,cursor.getColumnIndex(SenzorsDbContract.Pay.COLUMN_NAME_payTime)+"");
-
-            // fill senz list
-            System.out.println("Done in Create object");
-            sensorList.add(pay);
+            payzList.add(new Pay(_account, _amount, _time));
         }
 
         // clean
         cursor.close();
         db.close();
 
+        Log.d(TAG, "payz count " + payzList.size());
 
-        return sensorList;
-
+        return payzList;
     }
 
-    public void clearTable() {
-        SQLiteDatabase db = SenzorsDbHelper.getInstance(context).getWritableDatabase();
-
-        // delete senz of given user
-
-        db.close();
-    }
-
-
-    public Summary getSummeryAmmount(){
-        SQLiteDatabase db = SenzorsDbHelper.getInstance(context).getWritableDatabase();
-        String query = "SELECT COUNT("+SenzorsDbContract.Pay._ID+") AS trcount, SUM("+SenzorsDbContract.Pay.COLUMN_NAME_payAmount+") AS total" +
-                " FROM " +SenzorsDbContract.Pay.TABLE_NAME;
-        Log.e(TAG,query);
-        Cursor cursor = db.rawQuery(query, null);
-        int tcount;
-        int tamount;
-        if(cursor.moveToFirst()){
-            tcount = cursor.getInt(cursor.getColumnIndex("trcount"));
-
-            tamount = cursor.getInt(cursor.getColumnIndex("total"));
-        }
-        else{
-            tcount = 0;
-
-            tamount = 0;
-        }
-
-        Calendar cp = Calendar.getInstance();
-
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-        String formattedDate = df.format(cp.getTime());
-
-        Summary tempsum=new Summary("10255",""+tcount,""+tamount,formattedDate);
-
-
-
-        return tempsum;
-    }
 }

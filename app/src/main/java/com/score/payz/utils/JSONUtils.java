@@ -17,9 +17,8 @@ public class JSONUtils {
 
         String acc = jsonObject.getString("acc");
         String amnt = jsonObject.getString("amnt");
-        String invoiceNo = jsonObject.getString("billNo");
 
-        return new Pay(1, acc, "No", invoiceNo, Double.parseDouble(amnt), "time");
+        return new Pay(acc, amnt, "TIME");
     }
 
     public static String getTopUpJson(TopUp topUp) throws JSONException {
