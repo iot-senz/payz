@@ -2,7 +2,6 @@ package com.score.payz.pojos;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.util.StringBuilderPrinter;
 
 /**
  * Created by chathura on 5/11/16.
@@ -17,11 +16,11 @@ public class Pay implements Parcelable {
     String payTime;
 
     public Pay(int id,
-                       String shopName,
-                       String shopNo,
-                       String invoiceNumber,
-                       double payAmount,
-                       String payTime) {
+               String shopName,
+               String shopNo,
+               String invoiceNumber,
+               double payAmount,
+               String payTime) {
         this.id = id;
         this.shopName = shopName;
         this.shopNo = shopNo;

@@ -15,6 +15,7 @@ import android.nfc.tech.NfcF;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.v4.app.ActionBarDrawerToggle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
@@ -31,9 +32,10 @@ import android.widget.Toast;
 import com.github.siyamed.shapeimageview.CircularImageView;
 import com.score.payz.R;
 import com.score.payz.pojos.DrawerItem;
+import com.score.payz.pojos.Pay;
+import com.score.payz.utils.JSONUtils;
 
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -57,7 +59,7 @@ public class HomeActivity extends FragmentActivity {
     private ArrayList<DrawerItem> drawerItemList;
     private DrawerAdapter drawerAdapter;
 
-    // type face
+    // custom type face
     private Typeface typeface;
 
     // user components
@@ -83,7 +85,7 @@ public class HomeActivity extends FragmentActivity {
         initDrawer();
         initDrawerUser();
         initDrawerList();
-        loadPayz();
+        loadFragment(new PayzFragment());
     }
 
     /**
@@ -119,36 +121,36 @@ public class HomeActivity extends FragmentActivity {
         String action = intent.getAction();
         Tag tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
 
-        String s = action + "\n\n" + tag.toString();
-        Log.d(TAG, "tag... " + s);
+        Log.d(TAG, "New intent action " + action);
+        Log.d(TAG, "New intent tag " + tag.toString());
 
         // parse through all NDEF messages and their records and pick text type only
+        // we only send one NDEF message(as a JSON string)
         Parcelable[] data = intent.getParcelableArrayExtra(NfcAdapter.EXTRA_NDEF_MESSAGES);
         if (data != null) {
             NdefMessage message = (NdefMessage) data[0];
-            String json = new String(message.getRecords()[0].getPayload());
+            String jsonString = new String(message.getRecords()[0].getPayload());
 
-            // TODO move to utils
-            JSONObject jsonObject = null;
             try {
-                jsonObject = new JSONObject(json);
-
-                String acc = jsonObject.getString("acc");
-                String amnt = jsonObject.getString("amnt");
-
-                Log.d(TAG, "----------------- " + json);
+                // parse JSON and get Pay
+                Pay pay = JSONUtils.getPay(jsonString);
 
                 // launch pay activity
                 Intent mapIntent = new Intent(this, PayActivity.class);
-                mapIntent.putExtra("EXTRA", amnt);
+                mapIntent.putExtra("EXTRA", pay);
                 startActivity(mapIntent);
                 overridePendingTransition(R.anim.bottom_in, R.anim.stay_in);
             } catch (JSONException e) {
                 e.printStackTrace();
+
+                Toast.makeText(this, "[ERROR] Invalid data", Toast.LENGTH_LONG).show();
             }
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -169,11 +171,7 @@ public class HomeActivity extends FragmentActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         // The action bar home/up should open or close the drawer.
         // ActionBarDrawerToggle will take care of this.
-        if (homeActionBarDrawerToggle.onOptionsItemSelected(item)) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
+        return homeActionBarDrawerToggle.onOptionsItemSelected(item) || super.onOptionsItemSelected(item);
     }
 
     /**
@@ -320,29 +318,28 @@ public class HomeActivity extends FragmentActivity {
                 Bitmap largeIcon = BitmapFactory.decodeResource(getResources(), R.drawable.wireless_app1);
                 userImage.setImageBitmap(largeIcon);
 
-                loadPayz();
+                loadFragment(new PayzFragment());
             } else if (position == 1) {
                 drawerItemList.get(1).setSelected(true);
 
                 Bitmap largeIcon = BitmapFactory.decodeResource(getResources(), R.drawable.payment_icon);
                 userImage.setImageBitmap(largeIcon);
 
-                loadTopUp();
+                loadFragment(new TopUpListFragment());
             } else if (position == 2) {
                 drawerItemList.get(2).setSelected(true);
 
                 Bitmap largeIcon = BitmapFactory.decodeResource(getResources(), R.drawable.history_red);
                 userImage.setImageBitmap(largeIcon);
 
-                loadHistory();
+                loadFragment(new HistoryFragment());
             } else if (position == 3) {
                 drawerItemList.get(3).setSelected(true);
 
                 Bitmap largeIcon = BitmapFactory.decodeResource(getResources(), R.drawable.settings_icon);
                 userImage.setImageBitmap(largeIcon);
 
-                loadHistory()
-                ;
+                loadFragment(new HistoryFragment());
             }
 
             drawerAdapter.notifyDataSetChanged();
@@ -350,57 +347,17 @@ public class HomeActivity extends FragmentActivity {
     }
 
     /**
-     * Load my sensor list fragment
+     * Load fragment to main view
+     *
+     * @param fragment loading fragment
      */
-    private void loadPay() {
-        PayzFragment payzFragment = new PayzFragment();
-
+    private void loadFragment(Fragment fragment) {
         // fragment transitions
         // Replace whatever is in the fragment_container view with this fragment,
         // and add the transaction to the back stack so the user can navigate back
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.main, payzFragment);
+        transaction.replace(R.id.main, fragment);
         transaction.commit();
-    }
-
-    private void loadPayz() {
-        PayzFragment payzFragment = new PayzFragment();
-
-        // fragment transitions
-        // Replace whatever is in the fragment_container view with this fragment,
-        // and add the transaction to the back stack so the user can navigate back
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.main, payzFragment);
-        transaction.commit();
-    }
-
-    private void loadTopUp() {
-        TopUpListFragment topUpFragment = new TopUpListFragment();
-
-        // fragment transitions
-        // Replace whatever is in the fragment_container view with this fragment,
-        // and add the transaction to the back stack so the user can navigate back
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.main, topUpFragment);
-        transaction.commit();
-    }
-
-    private void loadHistory() {
-        HistoryFragment historyFragment = new HistoryFragment();
-
-        // fragment transitions
-        // Replace whatever is in the fragment_container view with this fragment,
-        // and add the transaction to the back stack so the user can navigate back
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.main, historyFragment);
-        transaction.commit();
-    }
-
-    /**
-     * Exit from activity
-     */
-    private void exit() {
-        HomeActivity.this.finish();
     }
 
 }
