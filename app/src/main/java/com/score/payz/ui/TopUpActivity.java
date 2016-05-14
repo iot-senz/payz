@@ -50,25 +50,10 @@ public class TopUpActivity extends Activity implements NfcAdapter.CreateNdefMess
         setContentView(R.layout.topup_activity_layout);
         typeface = Typeface.createFromAsset(getAssets(), "fonts/vegur_2.otf");
 
-        initTopUp();
         initNfc();
         initUi();
         initActionBar();
-    }
-
-    /**
-     * Initialize top up from bundle extra
-     */
-    private void initTopUp() {
-        Bundle bundle = getIntent().getExtras();
-        if (bundle != null) {
-            topUp = bundle.getParcelable("EXTRA");
-
-            if (topUp != null) {
-                Log.i(TAG, "TopUP account :" + topUp.getAccount());
-                Log.i(TAG, "TopUP amount :" + topUp.getAmount());
-            }
-        }
+        initTopUp();
     }
 
     /**
@@ -90,9 +75,6 @@ public class TopUpActivity extends Activity implements NfcAdapter.CreateNdefMess
         clickToPay = (TextView) findViewById(R.id.click_to_pay);
         payAmountText = (TextView) findViewById(R.id.pay_amount_text);
 
-        // set text to pay amount
-        payAmountText.setText("$" + topUp.getAmount());
-
         clickToPay.setTypeface(typeface, Typeface.NORMAL);
         payAmountText.setTypeface(typeface, Typeface.BOLD);
     }
@@ -113,6 +95,23 @@ public class TopUpActivity extends Activity implements NfcAdapter.CreateNdefMess
         TextView actionBarTitle = (TextView) (findViewById(titleId));
         actionBarTitle.setTextColor(getResources().getColor(R.color.white));
         actionBarTitle.setTypeface(typeface);
+    }
+
+    /**
+     * Initialize top up from bundle extra
+     */
+    private void initTopUp() {
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null) {
+            topUp = bundle.getParcelable("EXTRA");
+
+            if (topUp != null) {
+                Log.i(TAG, "TopUP account :" + topUp.getAccount());
+                Log.i(TAG, "TopUP amount :" + topUp.getAmount());
+
+                payAmountText.setText("$" + topUp.getAmount());
+            }
+        }
     }
 
     @Override
