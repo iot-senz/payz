@@ -136,7 +136,7 @@ public class HomeActivity extends FragmentActivity {
                 Pay pay = JSONUtils.getPay(jsonString);
 
                 // launch pay activity
-                Intent mapIntent = new Intent(this, PayActivity.class);
+                Intent mapIntent = new Intent(this, PayzActivity.class);
                 mapIntent.putExtra("EXTRA", pay);
                 startActivity(mapIntent);
                 overridePendingTransition(R.anim.bottom_in, R.anim.stay_in);

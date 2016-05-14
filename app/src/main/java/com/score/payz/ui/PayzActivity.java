@@ -42,13 +42,10 @@ import com.score.senzc.pojos.User;
 
 import java.util.HashMap;
 
-//import com.wasn.pojos.BalanceQuery;
-//import com.wasn.utils.TransactionUtils;
 
+public class PayzActivity extends Activity implements View.OnClickListener {
 
-public class PayActivity extends Activity implements View.OnClickListener {
-
-    private static final String TAG = PayActivity.class.getName();
+    private static final String TAG = PayzActivity.class.getName();
 
     // deals with NFC
     private NfcAdapter nfcAdapter;
@@ -227,8 +224,8 @@ public class PayActivity extends Activity implements View.OnClickListener {
         cancel = (RelativeLayout) findViewById(R.id.sign_in_button_panel);
         accept = (RelativeLayout) findViewById(R.id.pay_amount_relative_layout);
 
-        cancel.setOnClickListener(PayActivity.this);
-        accept.setOnClickListener(PayActivity.this);
+        cancel.setOnClickListener(PayzActivity.this);
+        accept.setOnClickListener(PayzActivity.this);
 
         clickToPay.setTypeface(typeface, Typeface.NORMAL);
         payAmountText.setTypeface(typeface, Typeface.BOLD);
@@ -282,7 +279,7 @@ public class PayActivity extends Activity implements View.OnClickListener {
     public void onClick(View view) {
         if (view == cancel) {
             // cancel to main activity
-            PayActivity.this.finish();
+            PayzActivity.this.finish();
         } else if (view == accept) {
             onClickPut();
         }
@@ -300,7 +297,7 @@ public class PayActivity extends Activity implements View.OnClickListener {
             // initialize transaction
             pay = new Pay(1, "shop abc", account, "inv0001", amount, PayUtils.getCurrentTime().toString());
 
-            new SenzorsDbSource(PayActivity.this).createPay(pay);
+            new SenzorsDbSource(PayzActivity.this).createPay(pay);
             //navigateTransactionDetails(transaction);
             if (NetworkUtil.isAvailableNetwork(this)) {
                 displayInformationMessageDialog("Are you sure you want to do the transaction " + /* #Account " + /*pay.getClientAccountNo() +*/ " #Amount " + pay.getPayAmount());
@@ -366,7 +363,7 @@ public class PayActivity extends Activity implements View.OnClickListener {
 
         @Override
         public void onFinish() {
-            ActivityUtils.hideSoftKeyboard(PayActivity.this);
+            ActivityUtils.hideSoftKeyboard(PayzActivity.this);
             ActivityUtils.cancelProgressDialog();
 
             // display message dialog that we couldn't reach the user
@@ -410,7 +407,7 @@ public class PayActivity extends Activity implements View.OnClickListener {
 
                     // save transaction in db
                     if (pay != null)
-                        new SenzorsDbSource(PayActivity.this).createPay(pay);
+                        new SenzorsDbSource(PayzActivity.this).createPay(pay);
                 } else {
                     String informationMessage = "Failed to complete the payment";
                     displayMessageDialog("PUT fail", informationMessage);
@@ -493,7 +490,7 @@ public class PayActivity extends Activity implements View.OnClickListener {
                 // do transaction
                 dialog.cancel();
 
-                ActivityUtils.showProgressDialog(PayActivity.this, "Please wait...");
+                ActivityUtils.showProgressDialog(PayzActivity.this, "Please wait...");
 
                 // start new timer
                 isResponseReceived = false;
