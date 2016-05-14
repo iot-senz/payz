@@ -325,7 +325,7 @@ public class HomeActivity extends FragmentActivity {
                 Bitmap largeIcon = BitmapFactory.decodeResource(getResources(), R.drawable.payment_icon);
                 userImage.setImageBitmap(largeIcon);
 
-                loadFragment(new TopUpListFragment());
+                loadFragment(new TopUpFragment());
             } else if (position == 2) {
                 drawerItemList.get(2).setSelected(true);
 

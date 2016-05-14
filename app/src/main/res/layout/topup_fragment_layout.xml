@@ -3,180 +3,190 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="#fff"
-    android:orientation="vertical" >
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_weight="1"
         android:layout_margin="10dp"
-        android:orientation="vertical" >
+        android:layout_weight="1"
+        android:orientation="vertical">
 
         <RelativeLayout
+            android:id="@+id/dollar10_button"
             android:layout_width="fill_parent"
-            android:id="@+id/doller10Button"
-            android:background="@drawable/app_button_selector"
             android:layout_height="fill_parent"
             android:layout_margin="10dp"
-            android:clickable="true"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:background="@drawable/app_button_selector"
+            android:clickable="true">
+
             <TextView
-                android:layout_width="40dp"
                 android:id="@+id/transaction_icon"
+                android:layout_width="40dp"
                 android:layout_height="40dp"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
                 android:layout_marginLeft="20dp"
+                android:background="@drawable/circle_shape_blue"
                 android:gravity="center"
-                android:visibility="gone"
                 android:text="$"
                 android:textColor="#fff"
                 android:textSize="30sp"
-                android:layout_alignParentLeft="true"
-                android:background="@drawable/circle_shape_blue"
-                android:layout_centerVertical="true"/>
+                android:visibility="gone" />
+
             <TextView
+                android:id="@+id/dollar10_text"
                 android:layout_width="wrap_content"
-                android:textSize="35sp"
-                android:layout_marginLeft="38dp"
+                android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:id="@+id/doller10"
+                android:layout_marginLeft="38dp"
                 android:layout_toRightOf="@+id/transaction_icon"
                 android:text="10$"
                 android:textColor="#b5c976"
-                android:layout_height="wrap_content" />
+                android:textSize="35sp" />
         </RelativeLayout>
 
         <RelativeLayout
+            android:id="@+id/dollar20_button"
             android:layout_width="fill_parent"
-            android:id="@+id/summary_layout"
-            android:background="@drawable/app_button_selector"
             android:layout_height="fill_parent"
             android:layout_margin="10dp"
-            android:clickable="true"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:background="@drawable/app_button_selector"
+            android:clickable="true">
+
             <TextView
-                android:layout_width="40dp"
                 android:id="@+id/summary_icon"
+                android:layout_width="40dp"
                 android:layout_height="40dp"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
                 android:layout_marginLeft="20dp"
+                android:background="@drawable/circle_shape_blue"
                 android:gravity="center"
                 android:text="%"
-                android:visibility="gone"
                 android:textColor="#fff"
                 android:textSize="30sp"
-                android:layout_alignParentLeft="true"
-                android:background="@drawable/circle_shape_blue"
-                android:layout_centerVertical="true"/>
+                android:visibility="gone" />
+
             <TextView
+                android:id="@+id/dollar20_text"
                 android:layout_width="wrap_content"
-                android:textSize="35sp"
-                android:layout_marginLeft="38dp"
+                android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:id="@+id/doller20"
+                android:layout_marginLeft="38dp"
                 android:layout_toRightOf="@+id/summary_icon"
                 android:text="20$"
                 android:textColor="#b5c976"
-                android:layout_height="wrap_content" />
+                android:textSize="35sp" />
         </RelativeLayout>
 
 
         <RelativeLayout
+            android:id="@+id/dollar50_button"
             android:layout_width="fill_parent"
-            android:id="@+id/settings_layout"
-            android:clickable="true"
-            android:background="@drawable/app_button_selector"
             android:layout_height="fill_parent"
             android:layout_margin="10dp"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:background="@drawable/app_button_selector"
+            android:clickable="true">
+
             <TextView
-                android:layout_width="40dp"
                 android:id="@+id/settings_icon"
+                android:layout_width="40dp"
                 android:layout_height="40dp"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
                 android:layout_marginLeft="20dp"
+                android:background="@drawable/circle_shape_blue"
                 android:gravity="center"
                 android:text="!"
                 android:textColor="#fff"
                 android:textSize="30sp"
-                android:visibility="gone"
-                android:layout_alignParentLeft="true"
-                android:background="@drawable/circle_shape_blue"
-                android:layout_centerVertical="true"/>
+                android:visibility="gone" />
+
             <TextView
+                android:id="@+id/dollar50_text"
                 android:layout_width="wrap_content"
-                android:textSize="35sp"
-                android:layout_marginLeft="38dp"
+                android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:id="@+id/doller50"
+                android:layout_marginLeft="38dp"
                 android:layout_toRightOf="@+id/settings_icon"
                 android:text="50$"
                 android:textColor="#b5c976"
-                android:layout_height="wrap_content" />
+                android:textSize="35sp" />
         </RelativeLayout>
 
 
         <RelativeLayout
+            android:id="@+id/dollar100_button"
             android:layout_width="fill_parent"
-            android:id="@+id/transaction_layout1"
-            android:background="@drawable/app_button_selector"
             android:layout_height="fill_parent"
             android:layout_margin="10dp"
-            android:clickable="true"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:background="@drawable/app_button_selector"
+            android:clickable="true">
+
             <TextView
-                android:layout_width="40dp"
                 android:id="@+id/transaction_icon1"
+                android:layout_width="40dp"
                 android:layout_height="40dp"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
                 android:layout_marginLeft="20dp"
+                android:background="@drawable/circle_shape_blue"
                 android:gravity="center"
                 android:text="$"
-                android:visibility="gone"
                 android:textColor="#fff"
                 android:textSize="30sp"
-                android:layout_alignParentLeft="true"
-                android:background="@drawable/circle_shape_blue"
-                android:layout_centerVertical="true"/>
+                android:visibility="gone" />
+
             <TextView
+                android:id="@+id/dollar100_text"
                 android:layout_width="wrap_content"
-                android:textSize="35sp"
-                android:layout_marginLeft="38dp"
+                android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:id="@+id/doller100"
+                android:layout_marginLeft="38dp"
                 android:layout_toRightOf="@+id/transaction_icon1"
                 android:text="100$"
                 android:textColor="#b5c976"
-                android:layout_height="wrap_content" />
+                android:textSize="35sp" />
         </RelativeLayout>
 
         <RelativeLayout
+            android:id="@+id/dollar200_button"
             android:layout_width="fill_parent"
-            android:id="@+id/transaction_layout2"
-            android:background="@drawable/app_button_selector"
             android:layout_height="fill_parent"
             android:layout_margin="10dp"
-            android:clickable="true"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:background="@drawable/app_button_selector"
+            android:clickable="true">
+
             <TextView
-                android:layout_width="40dp"
                 android:id="@+id/transaction_icon2"
+                android:layout_width="40dp"
                 android:layout_height="40dp"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
                 android:layout_marginLeft="20dp"
+                android:background="@drawable/circle_shape_blue"
                 android:gravity="center"
                 android:text="$"
-                android:visibility="gone"
                 android:textColor="#fff"
                 android:textSize="30sp"
-                android:layout_alignParentLeft="true"
-                android:background="@drawable/circle_shape_blue"
-                android:layout_centerVertical="true"/>
+                android:visibility="gone" />
+
             <TextView
+                android:id="@+id/dollar200_text"
                 android:layout_width="wrap_content"
-                android:textSize="35sp"
-                android:layout_marginLeft="38dp"
+                android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:id="@+id/doller200"
+                android:layout_marginLeft="38dp"
                 android:layout_toRightOf="@+id/transaction_icon2"
                 android:text="200$"
                 android:textColor="#b5c976"
-                android:layout_height="wrap_content" />
+                android:textSize="35sp" />
         </RelativeLayout>
 
     </LinearLayout>

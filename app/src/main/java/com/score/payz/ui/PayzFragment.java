@@ -33,9 +33,7 @@ public class PayzFragment extends Fragment {
      */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        ViewGroup root = (ViewGroup) inflater.inflate(R.layout.payz_layout, container, false);
-
-        return root;
+        return inflater.inflate(R.layout.payz_fragment_layout, container, false);
     }
 
     /**

@@ -100,7 +100,7 @@ public class TopUpActivity extends Activity implements View.OnClickListener{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.topup_activity);
+        setContentView(R.layout.topup_activity_layout);
         typeface = Typeface.createFromAsset(getAssets(), "fonts/vegur_2.otf");
 
         //initNfc();
