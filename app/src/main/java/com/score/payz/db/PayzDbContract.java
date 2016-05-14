@@ -7,7 +7,7 @@ import android.provider.BaseColumns;
  *
  * @author erangaeb@gmail.com (eranga herath)
  */
-public class SenzorsDbContract {
+public class PayzDbContract {
 
     /* Inner class that defines pyaz table contents */
     public static abstract class Pay implements BaseColumns {

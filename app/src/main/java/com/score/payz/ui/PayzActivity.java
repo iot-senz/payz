@@ -25,7 +25,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.score.payz.R;
-import com.score.payz.db.SenzorsDbSource;
+import com.score.payz.db.PayzDbSource;
 import com.score.payz.pojos.Pay;
 import com.score.payz.utils.ActivityUtils;
 import com.score.payz.utils.NetworkUtil;
@@ -282,7 +282,7 @@ public class PayzActivity extends Activity implements View.OnClickListener {
 
                     // save transaction in db
                     if (pay != null)
-                        new SenzorsDbSource(PayzActivity.this).createPayz(pay);
+                        new PayzDbSource(PayzActivity.this).createPayz(pay);
                 } else {
                     String informationMessage = "Failed to complete the payment";
                     displayMessageDialog("PUT fail", informationMessage);

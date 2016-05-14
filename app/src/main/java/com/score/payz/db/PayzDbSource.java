@@ -16,11 +16,11 @@ import java.util.List;
  *
  * @author erangaeb@gmail.com (eranga herath)
  */
-public class SenzorsDbSource {
-    private static final String TAG = SenzorsDbSource.class.getName();
+public class PayzDbSource {
+    private static final String TAG = PayzDbSource.class.getName();
     private static Context context;
 
-    public SenzorsDbSource(Context context) {
+    public PayzDbSource(Context context) {
         Log.i(TAG, "Init: db source");
         this.context = context;
     }
@@ -28,14 +28,14 @@ public class SenzorsDbSource {
     public void createPayz(Pay pay) {
         Log.i(TAG, "Create payz with account: " + pay.getAccount() + " amount: " + pay.getAmount());
 
-        SQLiteDatabase db = SenzorsDbHelper.getInstance(context).getWritableDatabase();
+        SQLiteDatabase db = PayzDbHelper.getInstance(context).getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put(SenzorsDbContract.Pay.COLUMN_NAME_ACCOUNT, pay.getAccount());
-        values.put(SenzorsDbContract.Pay.COLUMN_NAME_AMOUNT, pay.getAmount());
-        values.put(SenzorsDbContract.Pay.COLUMN_NAME_TIME, pay.getTime());
+        values.put(PayzDbContract.Pay.COLUMN_NAME_ACCOUNT, pay.getAccount());
+        values.put(PayzDbContract.Pay.COLUMN_NAME_AMOUNT, pay.getAmount());
+        values.put(PayzDbContract.Pay.COLUMN_NAME_TIME, pay.getTime());
 
-        db.insert(SenzorsDbContract.Pay.TABLE_NAME, null, values);
+        db.insert(PayzDbContract.Pay.TABLE_NAME, null, values);
         db.close();
     }
 
@@ -44,8 +44,8 @@ public class SenzorsDbSource {
 
         List<Pay> payzList = new ArrayList<Pay>();
 
-        SQLiteDatabase db = SenzorsDbHelper.getInstance(context).getReadableDatabase();
-        Cursor cursor = db.query(SenzorsDbContract.Pay.TABLE_NAME, null, null, null, null, null, null);
+        SQLiteDatabase db = PayzDbHelper.getInstance(context).getReadableDatabase();
+        Cursor cursor = db.query(PayzDbContract.Pay.TABLE_NAME, null, null, null, null, null, null);
 
         // user attributes
         String _account;
@@ -54,9 +54,9 @@ public class SenzorsDbSource {
 
         // extract attributes
         while (cursor.moveToNext()) {
-            _account = cursor.getString(cursor.getColumnIndex(SenzorsDbContract.Pay.COLUMN_NAME_ACCOUNT));
-            _amount = cursor.getString(cursor.getColumnIndex(SenzorsDbContract.Pay.COLUMN_NAME_AMOUNT));
-            _time = cursor.getString(cursor.getColumnIndex(SenzorsDbContract.Pay.COLUMN_NAME_TIME));
+            _account = cursor.getString(cursor.getColumnIndex(PayzDbContract.Pay.COLUMN_NAME_ACCOUNT));
+            _amount = cursor.getString(cursor.getColumnIndex(PayzDbContract.Pay.COLUMN_NAME_AMOUNT));
+            _time = cursor.getString(cursor.getColumnIndex(PayzDbContract.Pay.COLUMN_NAME_TIME));
 
             payzList.add(new Pay(_account, _amount, _time));
         }

@@ -10,12 +10,12 @@ import android.util.Log;
  *
  * @author erangaeb@gmail.com(eranga herath)
  */
-public class SenzorsDbHelper extends SQLiteOpenHelper {
+public class PayzDbHelper extends SQLiteOpenHelper {
 
-    private static final String TAG = SenzorsDbHelper.class.getName();
+    private static final String TAG = PayzDbHelper.class.getName();
 
     // we use singleton database
-    private static SenzorsDbHelper senzorsDbHelper;
+    private static PayzDbHelper payzDbHelper;
 
     // If you change the database schema, you must increment the database version
     private static final int DATABASE_VERSION = 6;
@@ -24,14 +24,14 @@ public class SenzorsDbHelper extends SQLiteOpenHelper {
     private static final String NUMBER_TYPE = " NUM";
 
     private static final String SQL_CREATE_PAYZ =
-            "CREATE TABLE IF NOT EXISTS " + SenzorsDbContract.Pay.TABLE_NAME + " (" +
-                    SenzorsDbContract.Pay._ID + " " + " INTEGER PRIMARY KEY AUTOINCREMENT" + ", " +
-                    SenzorsDbContract.Pay.COLUMN_NAME_ACCOUNT + " " + TEXT_TYPE + ", " +
-                    SenzorsDbContract.Pay.COLUMN_NAME_AMOUNT + " " + TEXT_TYPE + " NOT NULL" + ", " +
-                    SenzorsDbContract.Pay.COLUMN_NAME_TIME + " " + NUMBER_TYPE + ")";
+            "CREATE TABLE IF NOT EXISTS " + PayzDbContract.Pay.TABLE_NAME + " (" +
+                    PayzDbContract.Pay._ID + " " + " INTEGER PRIMARY KEY AUTOINCREMENT" + ", " +
+                    PayzDbContract.Pay.COLUMN_NAME_ACCOUNT + " " + TEXT_TYPE + ", " +
+                    PayzDbContract.Pay.COLUMN_NAME_AMOUNT + " " + TEXT_TYPE + " NOT NULL" + ", " +
+                    PayzDbContract.Pay.COLUMN_NAME_TIME + " " + NUMBER_TYPE + ")";
 
     private static final String SQL_DELETE_PAYZ =
-            "DROP TABLE IF EXISTS " + SenzorsDbContract.Pay.TABLE_NAME;
+            "DROP TABLE IF EXISTS " + PayzDbContract.Pay.TABLE_NAME;
 
     /**
      * Init context
@@ -39,7 +39,7 @@ public class SenzorsDbHelper extends SQLiteOpenHelper {
      *
      * @param context application context
      */
-    public SenzorsDbHelper(Context context) {
+    public PayzDbHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
@@ -49,12 +49,12 @@ public class SenzorsDbHelper extends SQLiteOpenHelper {
      * @param context application context
      * @return db helper instance
      */
-    synchronized static SenzorsDbHelper getInstance(Context context) {
-        if (senzorsDbHelper == null) {
-            senzorsDbHelper = new SenzorsDbHelper(context.getApplicationContext());
+    synchronized static PayzDbHelper getInstance(Context context) {
+        if (payzDbHelper == null) {
+            payzDbHelper = new PayzDbHelper(context.getApplicationContext());
         }
 
-        return (senzorsDbHelper);
+        return payzDbHelper;
     }
 
     /**
