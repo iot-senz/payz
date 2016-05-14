@@ -36,7 +36,6 @@ import com.score.senzc.pojos.User;
 
 import java.util.HashMap;
 
-
 public class PayzActivity extends Activity implements View.OnClickListener {
 
     private static final String TAG = PayzActivity.class.getName();
