@@ -24,14 +24,14 @@ public class PayzDbHelper extends SQLiteOpenHelper {
     private static final String NUMBER_TYPE = " NUM";
 
     private static final String SQL_CREATE_PAYZ =
-            "CREATE TABLE IF NOT EXISTS " + PayzDbContract.Pay.TABLE_NAME + " (" +
-                    PayzDbContract.Pay._ID + " " + " INTEGER PRIMARY KEY AUTOINCREMENT" + ", " +
-                    PayzDbContract.Pay.COLUMN_NAME_ACCOUNT + " " + TEXT_TYPE + ", " +
-                    PayzDbContract.Pay.COLUMN_NAME_AMOUNT + " " + TEXT_TYPE + " NOT NULL" + ", " +
-                    PayzDbContract.Pay.COLUMN_NAME_TIME + " " + NUMBER_TYPE + ")";
+            "CREATE TABLE IF NOT EXISTS " + PayzDbContract.Payz.TABLE_NAME + " (" +
+                    PayzDbContract.Payz._ID + " " + " INTEGER PRIMARY KEY AUTOINCREMENT" + ", " +
+                    PayzDbContract.Payz.COLUMN_NAME_ACCOUNT + " " + TEXT_TYPE + ", " +
+                    PayzDbContract.Payz.COLUMN_NAME_AMOUNT + " " + TEXT_TYPE + " NOT NULL" + ", " +
+                    PayzDbContract.Payz.COLUMN_NAME_TIME + " " + NUMBER_TYPE + ")";
 
     private static final String SQL_DELETE_PAYZ =
-            "DROP TABLE IF EXISTS " + PayzDbContract.Pay.TABLE_NAME;
+            "DROP TABLE IF EXISTS " + PayzDbContract.Payz.TABLE_NAME;
 
     /**
      * Init context

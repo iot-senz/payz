@@ -10,7 +10,7 @@ import android.provider.BaseColumns;
 public class PayzDbContract {
 
     /* Inner class that defines pyaz table contents */
-    public static abstract class Pay implements BaseColumns {
+    public static abstract class Payz implements BaseColumns {
         public static final String TABLE_NAME = "payz";
         public static final String COLUMN_NAME_ACCOUNT = "account";
         public static final String COLUMN_NAME_AMOUNT = "amount";

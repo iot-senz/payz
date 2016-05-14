@@ -6,8 +6,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
-import com.score.payz.pojos.Payz;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,27 +23,27 @@ public class PayzDbSource {
         this.context = context;
     }
 
-    public void createPayz(Payz payz) {
+    public void createPayz(com.score.payz.pojos.Payz payz) {
         Log.i(TAG, "Create payz with account: " + payz.getAccount() + " amount: " + payz.getAmount());
 
         SQLiteDatabase db = PayzDbHelper.getInstance(context).getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put(PayzDbContract.Pay.COLUMN_NAME_ACCOUNT, payz.getAccount());
-        values.put(PayzDbContract.Pay.COLUMN_NAME_AMOUNT, payz.getAmount());
-        values.put(PayzDbContract.Pay.COLUMN_NAME_TIME, payz.getTime());
+        values.put(PayzDbContract.Payz.COLUMN_NAME_ACCOUNT, payz.getAccount());
+        values.put(PayzDbContract.Payz.COLUMN_NAME_AMOUNT, payz.getAmount());
+        values.put(PayzDbContract.Payz.COLUMN_NAME_TIME, payz.getTime());
 
-        db.insert(PayzDbContract.Pay.TABLE_NAME, null, values);
+        db.insert(PayzDbContract.Payz.TABLE_NAME, null, values);
         db.close();
     }
 
-    public List<Payz> readAllPayz() {
+    public List<com.score.payz.pojos.Payz> readAllPayz() {
         Log.i(TAG, "Read payz");
 
-        List<Payz> payzList = new ArrayList<Payz>();
+        List<com.score.payz.pojos.Payz> payzList = new ArrayList<com.score.payz.pojos.Payz>();
 
         SQLiteDatabase db = PayzDbHelper.getInstance(context).getReadableDatabase();
-        Cursor cursor = db.query(PayzDbContract.Pay.TABLE_NAME, null, null, null, null, null, null);
+        Cursor cursor = db.query(PayzDbContract.Payz.TABLE_NAME, null, null, null, null, null, null);
 
         // user attributes
         String _account;
@@ -54,11 +52,11 @@ public class PayzDbSource {
 
         // extract attributes
         while (cursor.moveToNext()) {
-            _account = cursor.getString(cursor.getColumnIndex(PayzDbContract.Pay.COLUMN_NAME_ACCOUNT));
-            _amount = cursor.getString(cursor.getColumnIndex(PayzDbContract.Pay.COLUMN_NAME_AMOUNT));
-            _time = cursor.getString(cursor.getColumnIndex(PayzDbContract.Pay.COLUMN_NAME_TIME));
+            _account = cursor.getString(cursor.getColumnIndex(PayzDbContract.Payz.COLUMN_NAME_ACCOUNT));
+            _amount = cursor.getString(cursor.getColumnIndex(PayzDbContract.Payz.COLUMN_NAME_AMOUNT));
+            _time = cursor.getString(cursor.getColumnIndex(PayzDbContract.Payz.COLUMN_NAME_TIME));
 
-            payzList.add(new Payz(_account, _amount, _time));
+            payzList.add(new com.score.payz.pojos.Payz(_account, _amount, _time));
         }
 
         // clean

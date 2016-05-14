@@ -85,7 +85,7 @@ public class TopUpActivity extends Activity implements NfcAdapter.CreateNdefMess
         // button will take the user one step up in the application's hierarchy.
         final ActionBar actionBar = getActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setTitle("Top Up $" + topUp.getAmount());
+        actionBar.setTitle("Top Up");
         getActionBar().setBackgroundDrawable(new ColorDrawable(0xffb5c976));
 
         // set custom font for
