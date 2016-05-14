@@ -163,6 +163,7 @@ public class PayzActivity extends Activity implements View.OnClickListener {
             if (payz != null) {
                 Log.i(TAG, "Pay account :" + payz.getAccount());
                 Log.i(TAG, "Pay amount :" + payz.getAmount());
+                Log.i(TAG, "Pay time :" + payz.getTime());
 
                 payAmountText.setText("$" + payz.getAmount());
             }

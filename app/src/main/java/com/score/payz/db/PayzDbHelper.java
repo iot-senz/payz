@@ -28,7 +28,7 @@ public class PayzDbHelper extends SQLiteOpenHelper {
                     PayzDbContract.Payz._ID + " " + " INTEGER PRIMARY KEY AUTOINCREMENT" + ", " +
                     PayzDbContract.Payz.COLUMN_NAME_ACCOUNT + " " + TEXT_TYPE + ", " +
                     PayzDbContract.Payz.COLUMN_NAME_AMOUNT + " " + TEXT_TYPE + " NOT NULL" + ", " +
-                    PayzDbContract.Payz.COLUMN_NAME_TIME + " " + NUMBER_TYPE + ")";
+                    PayzDbContract.Payz.COLUMN_NAME_TIME + " " + TEXT_TYPE + ")";
 
     private static final String SQL_DELETE_PAYZ =
             "DROP TABLE IF EXISTS " + PayzDbContract.Payz.TABLE_NAME;
