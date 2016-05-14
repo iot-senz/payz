@@ -58,7 +58,7 @@ public class PayzActivity extends Activity implements View.OnClickListener {
     private ISenzService senzService;
     private boolean isServiceBound;
 
-    // current pay
+    // activity deal with pay
     private Pay pay;
 
     // service connection
@@ -198,7 +198,15 @@ public class PayzActivity extends Activity implements View.OnClickListener {
         }
     }
 
-    private Senz getPutSenz() {
+    private void doPut(Senz senz) {
+        try {
+            senzService.send(senz);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private Senz createPutSenz() {
         HashMap<String, String> senzAttributes = new HashMap<>();
         senzAttributes.put("amnt", "100");
         senzAttributes.put("acc", "shop01");
@@ -211,14 +219,6 @@ public class PayzActivity extends Activity implements View.OnClickListener {
         User receiver = new User("", "payzbank");
 
         return new Senz(id, signature, senzType, null, receiver, senzAttributes);
-    }
-
-    private void doPut(Senz senz) {
-        try {
-            senzService.send(senz);
-        } catch (RemoteException e) {
-            e.printStackTrace();
-        }
     }
 
     /**
@@ -334,7 +334,7 @@ public class PayzActivity extends Activity implements View.OnClickListener {
     /**
      * Display message dialog when user going to logout
      *
-     * @param message
+     * @param message message to display
      */
     public void displayInformationMessageDialog(String message) {
         final Dialog dialog = new Dialog(this);
@@ -369,7 +369,7 @@ public class PayzActivity extends Activity implements View.OnClickListener {
 
                 // start new timer
                 isResponseReceived = false;
-                senzCountDownTimer = new SenzCountDownTimer(16000, 5000, getPutSenz());
+                senzCountDownTimer = new SenzCountDownTimer(16000, 5000, createPutSenz());
                 senzCountDownTimer.start();
             }
         });
