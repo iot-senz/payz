@@ -26,7 +26,7 @@ import android.widget.Toast;
 
 import com.score.payz.R;
 import com.score.payz.db.PayzDbSource;
-import com.score.payz.pojos.Pay;
+import com.score.payz.pojos.Payz;
 import com.score.payz.utils.ActivityUtils;
 import com.score.payz.utils.NetworkUtil;
 import com.score.senz.ISenzService;
@@ -58,8 +58,8 @@ public class PayzActivity extends Activity implements View.OnClickListener {
     private ISenzService senzService;
     private boolean isServiceBound;
 
-    // activity deal with pay
-    private Pay pay;
+    // activity deal with payz
+    private Payz payz;
 
     // service connection
     private ServiceConnection senzServiceConnection = new ServiceConnection() {
@@ -158,13 +158,13 @@ public class PayzActivity extends Activity implements View.OnClickListener {
     private void initPay() {
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
-            pay = bundle.getParcelable("EXTRA");
+            payz = bundle.getParcelable("EXTRA");
 
-            if (pay != null) {
-                Log.i(TAG, "Pay account :" + pay.getAccount());
-                Log.i(TAG, "Pay amount :" + pay.getAmount());
+            if (payz != null) {
+                Log.i(TAG, "Pay account :" + payz.getAccount());
+                Log.i(TAG, "Pay amount :" + payz.getAmount());
 
-                payAmountText.setText("$" + pay.getAmount());
+                payAmountText.setText("$" + payz.getAmount());
             }
         }
     }
@@ -192,7 +192,7 @@ public class PayzActivity extends Activity implements View.OnClickListener {
         ActivityUtils.hideSoftKeyboard(this);
 
         if (NetworkUtil.isAvailableNetwork(this)) {
-            displayInformationMessageDialog("Are you sure you want to pay" + " #Amount " + pay.getAmount());
+            displayInformationMessageDialog("Are you sure you want to pay" + " #Amount " + payz.getAmount());
         } else {
             displayMessageDialog("#ERROR", "No network connection");
         }
@@ -281,8 +281,8 @@ public class PayzActivity extends Activity implements View.OnClickListener {
                     Toast.makeText(this, "Payment successful", Toast.LENGTH_LONG).show();
 
                     // save transaction in db
-                    if (pay != null)
-                        new PayzDbSource(PayzActivity.this).createPayz(pay);
+                    if (payz != null)
+                        new PayzDbSource(PayzActivity.this).createPayz(payz);
                 } else {
                     String informationMessage = "Failed to complete the payment";
                     displayMessageDialog("PUT fail", informationMessage);

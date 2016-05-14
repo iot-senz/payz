@@ -8,18 +8,18 @@ import android.os.Parcelable;
  *
  * @author eranga bandara (erangaeb@gmail.com)
  */
-public class Pay implements Parcelable {
+public class Payz implements Parcelable {
     String account;
     String amount;
     String time;
 
-    public Pay(String account, String amount, String time) {
+    public Payz(String account, String amount, String time) {
         this.account = account;
         this.amount = amount;
         this.time = time;
     }
 
-    protected Pay(Parcel in) {
+    protected Payz(Parcel in) {
         account = in.readString();
         amount = in.readString();
         time = in.readString();
@@ -49,15 +49,15 @@ public class Pay implements Parcelable {
         this.time = time;
     }
 
-    public static final Creator<Pay> CREATOR = new Creator<Pay>() {
+    public static final Creator<Payz> CREATOR = new Creator<Payz>() {
         @Override
-        public Pay createFromParcel(Parcel in) {
-            return new Pay(in);
+        public Payz createFromParcel(Parcel in) {
+            return new Payz(in);
         }
 
         @Override
-        public Pay[] newArray(int size) {
-            return new Pay[size];
+        public Payz[] newArray(int size) {
+            return new Payz[size];
         }
     };
 

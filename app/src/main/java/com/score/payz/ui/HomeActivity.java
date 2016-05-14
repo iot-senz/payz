@@ -32,7 +32,7 @@ import android.widget.Toast;
 import com.github.siyamed.shapeimageview.CircularImageView;
 import com.score.payz.R;
 import com.score.payz.pojos.DrawerItem;
-import com.score.payz.pojos.Pay;
+import com.score.payz.pojos.Payz;
 import com.score.payz.utils.JSONUtils;
 
 import org.json.JSONException;
@@ -71,7 +71,6 @@ public class HomeActivity extends FragmentActivity {
     private PendingIntent nfcPendingIntent;
     private IntentFilter[] nfcIntentFilters;
     private String[][] nfcTechLists;
-
 
     /**
      * {@inheritDoc}
@@ -133,11 +132,11 @@ public class HomeActivity extends FragmentActivity {
 
             try {
                 // parse JSON and get Pay
-                Pay pay = JSONUtils.getPay(jsonString);
+                Payz payz = JSONUtils.getPay(jsonString);
 
                 // launch pay activity
                 Intent mapIntent = new Intent(this, PayzActivity.class);
-                mapIntent.putExtra("EXTRA", pay);
+                mapIntent.putExtra("EXTRA", payz);
                 startActivity(mapIntent);
                 overridePendingTransition(R.anim.bottom_in, R.anim.stay_in);
             } catch (JSONException e) {
