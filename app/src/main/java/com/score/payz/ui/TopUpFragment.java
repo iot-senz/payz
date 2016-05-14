@@ -12,6 +12,10 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.score.payz.R;
+import com.score.payz.exceptions.NoUserException;
+import com.score.payz.pojos.TopUp;
+import com.score.payz.utils.PreferenceUtils;
+import com.score.senzc.pojos.User;
 
 /**
  * TopUp fragment
@@ -19,6 +23,8 @@ import com.score.payz.R;
  * @author erangaeb@gmail.com (eranga bandra)
  */
 public class TopUpFragment extends android.support.v4.app.Fragment implements View.OnClickListener {
+
+    private static final String TAG = TopUpFragment.class.getName();
 
     // custom font
     private Typeface typeface;
@@ -145,11 +151,19 @@ public class TopUpFragment extends android.support.v4.app.Fragment implements Vi
     /**
      * Launch TopUpActivity from here
      *
-     * @param amount amount to topup
+     * @param topUpAmount top up amount
      */
-    private void navigateToTopUpActivity(String amount) {
-        Intent intent = new Intent(this.getActivity(), TopUpActivity.class);
-        startActivity(intent);
-        this.getActivity().overridePendingTransition(R.anim.bottom_in, R.anim.stay_in);
+    private void navigateToTopUpActivity(String topUpAmount) {
+        try {
+            User user = PreferenceUtils.getUser(this.getActivity());
+            TopUp topUp = new TopUp(user.getUsername(), topUpAmount, "TIME");
+
+            Intent intent = new Intent(this.getActivity(), TopUpActivity.class);
+            intent.putExtra("EXTRA", topUp);
+            startActivity(intent);
+            this.getActivity().overridePendingTransition(R.anim.bottom_in, R.anim.stay_in);
+        } catch (NoUserException e) {
+            e.printStackTrace();
+        }
     }
 }

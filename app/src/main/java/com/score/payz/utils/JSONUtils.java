@@ -1,6 +1,7 @@
 package com.score.payz.utils;
 
 import com.score.payz.pojos.Pay;
+import com.score.payz.pojos.TopUp;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -19,5 +20,13 @@ public class JSONUtils {
         String invoiceNo = jsonObject.getString("billNo");
 
         return new Pay(1, acc, "No", invoiceNo, Double.parseDouble(amnt), "time");
+    }
+
+    public static String getTopUpJson(TopUp topUp) throws JSONException {
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("acc", topUp.getAccount());
+        jsonObject.put("amnt", topUp.getAmount());
+
+        return jsonObject.toString();
     }
 }
