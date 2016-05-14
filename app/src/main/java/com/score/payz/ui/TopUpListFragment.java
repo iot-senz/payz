@@ -21,7 +21,7 @@ import com.score.payz.R;
  */
 public class TopUpListFragment extends android.support.v4.app.Fragment implements View.OnClickListener {
 
-    private static final String TAG = TopUpFragment.class.getName();
+    private static final String TAG = TopUpListFragment.class.getName();
 
     // custom font
     private Typeface typeface;

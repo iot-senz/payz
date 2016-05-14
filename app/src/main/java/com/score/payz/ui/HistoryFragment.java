@@ -25,7 +25,7 @@ import java.util.ArrayList;
  */
 public class HistoryFragment extends android.support.v4.app.Fragment {
 
-    private static final String TAG = TopUpFragment.class.getName();
+    private static final String TAG = HistoryFragment.class.getName();
 
     // custom font
     private Typeface typeface;

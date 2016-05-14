@@ -13,14 +13,11 @@ import android.widget.TextView;
 import com.score.payz.R;
 
 /**
- * Created by eranga on 5/7/16.
+ * Fragment to display NFC scan icon
+ *
+ * @author eranga bandara(erangaeb@gmail.com)
  */
 public class PayzFragment extends Fragment {
-
-    private static final String TAG = TopUpFragment.class.getName();
-
-    // custom font
-    private Typeface typeface;
 
     /**
      * {@inheritDoc}
@@ -48,7 +45,7 @@ public class PayzFragment extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        initUi();
+        initActionBar();
     }
 
     /**
@@ -62,8 +59,8 @@ public class PayzFragment extends Fragment {
     /**
      * Initialize UI components
      */
-    private void initUi() {
-        typeface = Typeface.createFromAsset(getActivity().getAssets(), "fonts/vegur_2.otf");
+    private void initActionBar() {
+        Typeface typeface = Typeface.createFromAsset(getActivity().getAssets(), "fonts/vegur_2.otf");
 
         // Set up action bar.
         // Specify that the Home button should show an "Up" caret, indicating that touching the
