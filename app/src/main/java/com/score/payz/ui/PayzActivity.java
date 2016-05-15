@@ -208,8 +208,8 @@ public class PayzActivity extends Activity implements View.OnClickListener {
 
     private Senz createPutSenz() {
         HashMap<String, String> senzAttributes = new HashMap<>();
-        senzAttributes.put("amnt", "100");
-        senzAttributes.put("acc", "shop01");
+        senzAttributes.put("amnt", payz.getAmount());
+        senzAttributes.put("acc", payz.getAccount());
         senzAttributes.put("time", ((Long) (System.currentTimeMillis() / 1000)).toString());
 
         // new senz
