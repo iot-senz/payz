@@ -129,6 +129,7 @@ public class HomeActivity extends FragmentActivity {
         if (data != null) {
             NdefMessage message = (NdefMessage) data[0];
             String jsonString = new String(message.getRecords()[0].getPayload());
+            Log.d(TAG, "NFC Data received, " + jsonString);
 
             try {
                 // parse JSON and get Pay
