@@ -43,7 +43,7 @@
                 android:layout_marginLeft="38dp"
                 android:layout_toRightOf="@+id/transaction_icon"
                 android:text="10$"
-                android:textColor="#b5c976"
+                android:textColor="#d26c6c"
                 android:textSize="35sp" />
         </RelativeLayout>
 
@@ -78,7 +78,7 @@
                 android:layout_marginLeft="38dp"
                 android:layout_toRightOf="@+id/summary_icon"
                 android:text="20$"
-                android:textColor="#b5c976"
+                android:textColor="#d26c6c"
                 android:textSize="35sp" />
         </RelativeLayout>
 
@@ -114,7 +114,7 @@
                 android:layout_marginLeft="38dp"
                 android:layout_toRightOf="@+id/settings_icon"
                 android:text="50$"
-                android:textColor="#b5c976"
+                android:textColor="#d26c6c"
                 android:textSize="35sp" />
         </RelativeLayout>
 
@@ -150,7 +150,7 @@
                 android:layout_marginLeft="38dp"
                 android:layout_toRightOf="@+id/transaction_icon1"
                 android:text="100$"
-                android:textColor="#b5c976"
+                android:textColor="#d26c6c"
                 android:textSize="35sp" />
         </RelativeLayout>
 
@@ -185,7 +185,7 @@
                 android:layout_marginLeft="38dp"
                 android:layout_toRightOf="@+id/transaction_icon2"
                 android:text="200$"
-                android:textColor="#b5c976"
+                android:textColor="#d26c6c"
                 android:textSize="35sp" />
         </RelativeLayout>
 

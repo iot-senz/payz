@@ -3,6 +3,7 @@ package com.score.payz.ui;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Dialog;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.nfc.NdefMessage;
@@ -35,6 +36,7 @@ public class TopUpActivity extends Activity implements NfcAdapter.CreateNdefMess
     private Typeface typeface;
 
     // UI components
+    private TextView textViewAppIcon;
     private TextView clickToPay;
     private TextView payAmountText;
 
@@ -47,8 +49,9 @@ public class TopUpActivity extends Activity implements NfcAdapter.CreateNdefMess
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        getWindow().requestFeature(Window.FEATURE_ACTION_BAR_OVERLAY);
         setContentView(R.layout.topup_activity_layout);
-        typeface = Typeface.createFromAsset(getAssets(), "fonts/vegur_2.otf");
 
         initNfc();
         initUi();
@@ -72,10 +75,12 @@ public class TopUpActivity extends Activity implements NfcAdapter.CreateNdefMess
     private void initUi() {
         typeface = Typeface.createFromAsset(getAssets(), "fonts/vegur_2.otf");
 
+        textViewAppIcon = (TextView) findViewById(R.id.app_icon);
         clickToPay = (TextView) findViewById(R.id.click_to_pay);
         payAmountText = (TextView) findViewById(R.id.pay_amount_text);
 
-        clickToPay.setTypeface(typeface, Typeface.NORMAL);
+        textViewAppIcon.setTypeface(typeface, Typeface.BOLD);
+        clickToPay.setTypeface(typeface, Typeface.BOLD);
         payAmountText.setTypeface(typeface, Typeface.BOLD);
     }
 
@@ -84,9 +89,10 @@ public class TopUpActivity extends Activity implements NfcAdapter.CreateNdefMess
         // Specify that the Home button should show an "Up" caret, indicating that touching the
         // button will take the user one step up in the application's hierarchy.
         final ActionBar actionBar = getActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setDisplayHomeAsUpEnabled(false);
         actionBar.setTitle("Top Up");
-        getActionBar().setBackgroundDrawable(new ColorDrawable(0xffb5c976));
+        actionBar.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        actionBar.setIcon(new ColorDrawable(getResources().getColor(android.R.color.transparent)));
 
         // set custom font for
         //  1. action bar title
@@ -94,7 +100,7 @@ public class TopUpActivity extends Activity implements NfcAdapter.CreateNdefMess
         int titleId = getResources().getIdentifier("action_bar_title", "id", "android");
         TextView actionBarTitle = (TextView) (findViewById(titleId));
         actionBarTitle.setTextColor(getResources().getColor(R.color.white));
-        actionBarTitle.setTypeface(typeface);
+        actionBarTitle.setTypeface(typeface, Typeface.BOLD);
     }
 
     /**

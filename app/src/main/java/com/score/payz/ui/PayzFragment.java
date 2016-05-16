@@ -66,7 +66,7 @@ public class PayzFragment extends Fragment {
         final ActionBar actionBar = getActivity().getActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setTitle("PayZ");
-        actionBar.setBackgroundDrawable(new ColorDrawable(0xff384e77));
+        actionBar.setBackgroundDrawable(new ColorDrawable(0xffd26c6c));
 
         // set custom font for
         //  1. action bar title

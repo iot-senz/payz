@@ -129,7 +129,7 @@ public class PayzActivity extends Activity implements View.OnClickListener {
         clickToPay = (TextView) findViewById(R.id.click_to_pay);
         payAmountText = (TextView) findViewById(R.id.pay_amount_text);
 
-        clickToPay.setTypeface(typeface, Typeface.NORMAL);
+        clickToPay.setTypeface(typeface, Typeface.BOLD);
         payAmountText.setTypeface(typeface, Typeface.BOLD);
 
         accept = (RelativeLayout) findViewById(R.id.pay_amount_relative_layout);
