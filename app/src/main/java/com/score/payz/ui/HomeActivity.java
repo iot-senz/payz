@@ -220,13 +220,13 @@ public class HomeActivity extends FragmentActivity {
 
     private void initDrawerUser() {
         userImage = (CircularImageView) findViewById(R.id.contact_image);
-        Bitmap largeIcon = BitmapFactory.decodeResource(getResources(), R.drawable.wireless_app1);
+        Bitmap largeIcon = BitmapFactory.decodeResource(getResources(), R.drawable.default_user_icon);
         userImage.setImageBitmap(largeIcon);
 
         typeface = Typeface.createFromAsset(getAssets(), "fonts/vegur_2.otf");
         username = (TextView) findViewById(R.id.home_user_text);
-        username.setText("PayZ");
-        username.setTypeface(typeface, Typeface.BOLD);
+        username.setText("@eranga");
+        username.setTypeface(typeface, Typeface.NORMAL);
     }
 
     /**
@@ -316,28 +316,28 @@ public class HomeActivity extends FragmentActivity {
 
                 // set image
                 Bitmap largeIcon = BitmapFactory.decodeResource(getResources(), R.drawable.wireless_app1);
-                userImage.setImageBitmap(largeIcon);
+                //userImage.setImageBitmap(largeIcon);
 
                 loadFragment(new PayzFragment());
             } else if (position == 1) {
                 drawerItemList.get(1).setSelected(true);
 
                 Bitmap largeIcon = BitmapFactory.decodeResource(getResources(), R.drawable.payment_icon);
-                userImage.setImageBitmap(largeIcon);
+                //userImage.setImageBitmap(largeIcon);
 
                 loadFragment(new TopUpFragment());
             } else if (position == 2) {
                 drawerItemList.get(2).setSelected(true);
 
                 Bitmap largeIcon = BitmapFactory.decodeResource(getResources(), R.drawable.history_red);
-                userImage.setImageBitmap(largeIcon);
+                //userImage.setImageBitmap(largeIcon);
 
                 loadFragment(new HistoryFragment());
             } else if (position == 3) {
                 drawerItemList.get(3).setSelected(true);
 
                 Bitmap largeIcon = BitmapFactory.decodeResource(getResources(), R.drawable.settings_icon);
-                userImage.setImageBitmap(largeIcon);
+                //userImage.setImageBitmap(largeIcon);
 
                 loadFragment(new HistoryFragment());
             }
