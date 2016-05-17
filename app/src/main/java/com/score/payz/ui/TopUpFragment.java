@@ -119,7 +119,7 @@ public class TopUpFragment extends android.support.v4.app.Fragment implements Vi
         final ActionBar actionBar = getActivity().getActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setTitle("Top up");
-        actionBar.setBackgroundDrawable(new ColorDrawable(0xffd26c6c));
+        actionBar.setBackgroundDrawable(new ColorDrawable(0xff666666));
 
         // set custom font for
         //  1. action bar title

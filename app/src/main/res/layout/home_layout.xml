@@ -41,8 +41,8 @@
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:layout_centerHorizontal="true"
-                    app:siBorderColor="#d26c6c"
-                    app:siBorderWidth="0.7dp">
+                    app:siBorderColor="#b5c976"
+                    app:siBorderWidth="1.5dp">
                 </com.github.siyamed.shapeimageview.CircularImageView>
 
                 <TextView
@@ -53,7 +53,7 @@
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="5dp"
                     android:text="Username"
-                    android:textColor="#d26c6c"
+                    android:textColor="#b5c976"
                     android:textSize="25sp">
                 </TextView>
             </RelativeLayout>
