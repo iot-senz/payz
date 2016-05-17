@@ -24,10 +24,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.score.senz.ISenzService;
-import com.score.senzc.enums.SenzTypeEnum;
-import com.score.senzc.pojos.Senz;
-import com.score.senzc.pojos.User;
 import com.score.payz.R;
 import com.score.payz.exceptions.InvalidInputFieldsException;
 import com.score.payz.services.RemoteSenzService;
@@ -35,6 +31,10 @@ import com.score.payz.utils.ActivityUtils;
 import com.score.payz.utils.NetworkUtil;
 import com.score.payz.utils.PreferenceUtils;
 import com.score.payz.utils.RSAUtils;
+import com.score.senz.ISenzService;
+import com.score.senzc.enums.SenzTypeEnum;
+import com.score.senzc.pojos.Senz;
+import com.score.senzc.pojos.User;
 
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
@@ -54,6 +54,7 @@ public class RegistrationActivity extends Activity implements View.OnClickListen
 
     // UI fields
     private EditText editTextUsername;
+    private TextView singUpButtonText;
     private RelativeLayout signUpButton;
     private Typeface typeface;
 
@@ -104,8 +105,8 @@ public class RegistrationActivity extends Activity implements View.OnClickListen
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        unbindService(senzServiceConnection);
-        unregisterReceiver(senzMessageReceiver);
+        if (senzServiceConnection != null) unbindService(senzServiceConnection);
+        if (senzMessageReceiver != null) unregisterReceiver(senzMessageReceiver);
     }
 
     /**
@@ -115,10 +116,12 @@ public class RegistrationActivity extends Activity implements View.OnClickListen
      */
     private void initUi() {
         editTextUsername = (EditText) findViewById(R.id.registration_phone_no);
+        singUpButtonText = (TextView) findViewById(R.id.registration_sign_up_text);
         signUpButton = (RelativeLayout) findViewById(R.id.registration_sign_up_button);
         signUpButton.setOnClickListener(RegistrationActivity.this);
 
         editTextUsername.setTypeface(typeface, Typeface.NORMAL);
+        singUpButtonText.setTypeface(typeface, Typeface.BOLD);
     }
 
     /**
