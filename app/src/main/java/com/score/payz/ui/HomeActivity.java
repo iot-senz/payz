@@ -291,10 +291,10 @@ public class HomeActivity extends FragmentActivity {
         // initialize drawer content
         // need to determine selected item according to the currently selected sensor type
         drawerItemList = new ArrayList();
-        drawerItemList.add(new DrawerItem("PayZ [10.20$]", "#b5c976", R.drawable.drawer_list_row_selector, R.drawable.drawer_list_row_selector, true, false));
-        drawerItemList.add(new DrawerItem("Top Up", "#b5c976", R.drawable.drawer_list_row_selector, R.drawable.drawer_list_row_selector, false, false));
-        drawerItemList.add(new DrawerItem("History", "#b5c976", R.drawable.drawer_list_row_selector, R.drawable.drawer_list_row_selector, false, false));
-        drawerItemList.add(new DrawerItem("Settings", "#b5c976", R.drawable.drawer_list_row_selector, R.drawable.drawer_list_row_selector, false, false));
+        drawerItemList.add(new DrawerItem("PayZ [10.20$]", "#eada00", R.drawable.drawer_list_row_selector, R.drawable.drawer_list_row_selector, true, false));
+        drawerItemList.add(new DrawerItem("Top Up", "#eada00", R.drawable.drawer_list_row_selector, R.drawable.drawer_list_row_selector, false, false));
+        drawerItemList.add(new DrawerItem("History", "#eada00", R.drawable.drawer_list_row_selector, R.drawable.drawer_list_row_selector, false, false));
+        drawerItemList.add(new DrawerItem("Settings", "#eada00", R.drawable.drawer_list_row_selector, R.drawable.drawer_list_row_selector, false, false));
 
         drawerAdapter = new DrawerAdapter(HomeActivity.this, drawerItemList);
         drawerListView = (ListView) findViewById(R.id.drawer);
