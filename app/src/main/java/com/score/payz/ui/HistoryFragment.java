@@ -82,7 +82,7 @@ public class HistoryFragment extends android.support.v4.app.Fragment {
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setTitle("History");
 
-        actionBar.setBackgroundDrawable(new ColorDrawable(0xff666666));
+        actionBar.setBackgroundDrawable(new ColorDrawable(0xffd26c6c));
 
         // set custom font for
         //  1. action bar title
