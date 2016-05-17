@@ -25,7 +25,7 @@ import com.score.payz.utils.JSONUtils;
 
 import org.json.JSONException;
 
-public class TopUpActivity extends Activity implements NfcAdapter.CreateNdefMessageCallback {
+public class TopUpActivity extends Activity implements NfcAdapter.CreateNdefMessageCallback, NfcAdapter.OnNdefPushCompleteCallback {
 
     private static final String TAG = TopUpActivity.class.getName();
 
@@ -69,6 +69,7 @@ public class TopUpActivity extends Activity implements NfcAdapter.CreateNdefMess
             Toast.makeText(this, "[ERROR] No NFC supported", Toast.LENGTH_LONG).show();
         } else {
             nfcAdapter.setNdefPushMessageCallback(this, this);
+            nfcAdapter.setOnNdefPushCompleteCallback(this, this);
         }
     }
 
@@ -120,6 +121,9 @@ public class TopUpActivity extends Activity implements NfcAdapter.CreateNdefMess
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public NdefMessage createNdefMessage(NfcEvent nfcEvent) {
         // create JSON message from TopUp
@@ -134,6 +138,22 @@ public class TopUpActivity extends Activity implements NfcAdapter.CreateNdefMess
         }
 
         return null;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void onNdefPushComplete(NfcEvent event) {
+        // start progress dialog
+        // ActivityUtils.showProgressDialog(this, "Please wait...");
+
+        // toast to notify wait
+        Toast.makeText(this, "We will notify you once transaction done", Toast.LENGTH_LONG).show();
+
+        // exit from activity
+        this.finish();
+        this.overridePendingTransition(R.anim.stay_in, R.anim.bottom_out);
     }
 
     /**
