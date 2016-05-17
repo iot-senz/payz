@@ -199,7 +199,7 @@ public class PayzActivity extends Activity implements View.OnClickListener {
         ActivityUtils.hideSoftKeyboard(this);
 
         if (NetworkUtil.isAvailableNetwork(this)) {
-            displayInformationMessageDialog("Are you sure you want to pay" + " #Amount " + payz.getAmount());
+            displayInformationMessageDialog("Are you sure you want to pay the amount " + payz.getAmount() + "$");
         } else {
             displayMessageDialog("#ERROR", "No network connection");
         }
@@ -287,12 +287,16 @@ public class PayzActivity extends Activity implements View.OnClickListener {
                 if (msg != null && msg.equalsIgnoreCase("PUTDONE")) {
                     Toast.makeText(this, "Payment successful", Toast.LENGTH_LONG).show();
 
+                    // exit from the activity
+                    this.finish();
+                    this.overridePendingTransition(R.anim.stay_in, R.anim.bottom_out);
+
                     // save transaction in db
                     if (payz != null)
                         new PayzDbSource(PayzActivity.this).createPayz(payz);
                 } else {
                     String informationMessage = "Failed to complete the payment";
-                    displayMessageDialog("PUT fail", informationMessage);
+                    displayMessageDialog("ERROR", informationMessage);
                 }
             }
         }
