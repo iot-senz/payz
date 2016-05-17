@@ -3,13 +3,14 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="#49a2cb"
+    android:background="#ffffff"
     android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_weight="1"
+        android:background="@drawable/blur6"
         android:orientation="vertical"
         android:padding="0dp">
 
@@ -17,43 +18,47 @@
             android:layout_width="fill_parent"
             android:layout_height="fill_parent">
 
-            <RelativeLayout
+            <TextView
                 android:id="@+id/app_icon"
                 android:layout_width="50dp"
-                android:layout_marginTop="55dp"
                 android:layout_height="50dp"
                 android:layout_centerHorizontal="true"
-                android:background="@drawable/payz_round">
-            </RelativeLayout>
+                android:layout_marginTop="100dp"
+                android:background="@drawable/circle_shape_yello"
+                android:gravity="center"
+                android:text="$"
+                android:textColor="#fff"
+                android:textSize="30sp"></TextView>
 
             <TextView
-                android:layout_below="@id/app_icon"
                 android:id="@+id/click_to_pay"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_below="@id/app_icon"
                 android:layout_centerHorizontal="true"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:layout_marginTop="10dp"
                 android:gravity="center"
-                android:text="You have purchased $20.00 \namount of goods. Please tap below to pay the amount"
-                android:textColor="#FFFFFF"
+                android:text="You gonna Top up $20.00 \namount with PayZ. Please tap tap your phone to NFC pad"
+                android:textColor="#fff"
                 android:textSize="20sp"
-                android:visibility="visible">
-            </TextView>
+                android:visibility="visible"></TextView>
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_marginTop="50dp"
+                android:layout_height="wrap_content"
                 android:layout_below="@+id/click_to_pay"
-                android:layout_height="wrap_content">
+                android:layout_marginTop="50dp">
+
                 <RelativeLayout
                     android:id="@+id/pay_amount_relative_layout"
                     android:layout_width="200dp"
                     android:layout_height="200dp"
                     android:layout_centerHorizontal="true"
-                    android:background="@drawable/circle_shape_red"
+                    android:background="@drawable/circle_shape_yello"
                     android:visibility="visible">
+
                     <TextView
                         android:id="@+id/pay_amount_text"
                         android:layout_width="wrap_content"
@@ -61,11 +66,12 @@
                         android:layout_centerHorizontal="true"
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="15dp"
-                        android:text="20.00"
+                        android:text="$20.00"
                         android:textColor="#ffffff"
-                        android:textSize="50sp">
-                    </TextView>
+                        android:textSize="50sp"></TextView>
+
                 </RelativeLayout>
+
             </RelativeLayout>
 
             <RelativeLayout
@@ -77,12 +83,14 @@
                 android:layout_marginRight="15dp"
                 android:orientation="horizontal"
                 android:visibility="gone">
+
                 <RelativeLayout
                     android:id="@+id/sign_in_button_panel"
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
                     android:layout_centerVertical="true"
                     android:background="@drawable/login_button_selector">
+
                     <TextView
                         android:id="@+id/reject_text"
                         android:layout_width="wrap_content"
@@ -92,8 +100,10 @@
                         android:textColor="#FF5f82c3"
                         android:textSize="16sp"
                         android:textStyle="bold">
+
                     </TextView>
                 </RelativeLayout>
+
             </RelativeLayout>
 
         </RelativeLayout>
