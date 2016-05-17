@@ -9,7 +9,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.score.payz.R;
-import com.score.payz.pojos.History;
+import com.score.payz.pojos.Payz;
 
 import java.util.ArrayList;
 
@@ -22,17 +22,17 @@ public class HistoryListAdapter extends BaseAdapter {
 
     private HistoryFragment activity;
     private Typeface typeface;
-    private ArrayList<History> historyList;
+    private ArrayList<Payz> payzList;
 
     /**
      * Initialize context variables
      *
-     * @param activity    friend list activity
-     * @param historyList friend list
+     * @param activity friend list activity
+     * @param payzList friend list
      */
-    public HistoryListAdapter(HistoryFragment activity, ArrayList<History> historyList) {
+    public HistoryListAdapter(HistoryFragment activity, ArrayList<Payz> payzList) {
         this.activity = activity;
-        this.historyList = historyList;
+        this.payzList = payzList;
         typeface = Typeface.createFromAsset(activity.getActivity().getAssets(), "fonts/vegur_2.otf");
     }
 
@@ -43,7 +43,7 @@ public class HistoryListAdapter extends BaseAdapter {
      */
     @Override
     public int getCount() {
-        return historyList.size();
+        return payzList.size();
     }
 
     /**
@@ -54,7 +54,7 @@ public class HistoryListAdapter extends BaseAdapter {
      */
     @Override
     public Object getItem(int i) {
-        return historyList.get(i);
+        return payzList.get(i);
     }
 
     /**
@@ -81,7 +81,7 @@ public class HistoryListAdapter extends BaseAdapter {
         // A ViewHolder keeps references to children views to avoid unnecessary calls
         // to findViewById() on each row.
         final ViewHolder holder;
-        final History history = (History) getItem(position);
+        final Payz payz = (Payz) getItem(position);
 
         if (view == null) {
             LayoutInflater layoutInflater = (LayoutInflater) activity.getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -92,7 +92,7 @@ public class HistoryListAdapter extends BaseAdapter {
             holder.amount = (TextView) view.findViewById(R.id.history_list_row_layout_amount);
             holder.iconText.setTypeface(typeface, Typeface.BOLD);
             holder.iconText.setTextColor(activity.getResources().getColor(R.color.white));
-            holder.name.setTypeface(typeface, Typeface.BOLD);
+            holder.name.setTypeface(typeface, Typeface.NORMAL);
             holder.amount.setTypeface(typeface, Typeface.NORMAL);
 
             view.setTag(holder);
@@ -103,8 +103,8 @@ public class HistoryListAdapter extends BaseAdapter {
 
         // bind text with view holder content view for efficient use
         holder.iconText.setText("$");
-        holder.name.setText(history.getName());
-        holder.amount.setText(history.getAmount());
+        holder.name.setText(payz.getTime());
+        holder.amount.setText(payz.getAmount() + " $");
         //view.setBackgroundResource(R.drawable.more_layout_selector_normal);
 
         return view;
