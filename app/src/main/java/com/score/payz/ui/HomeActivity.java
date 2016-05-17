@@ -226,7 +226,7 @@ public class HomeActivity extends FragmentActivity {
         typeface = Typeface.createFromAsset(getAssets(), "fonts/vegur_2.otf");
         username = (TextView) findViewById(R.id.home_user_text);
         username.setText("@eranga");
-        username.setTypeface(typeface, Typeface.NORMAL);
+        username.setTypeface(typeface, Typeface.BOLD);
     }
 
     /**
