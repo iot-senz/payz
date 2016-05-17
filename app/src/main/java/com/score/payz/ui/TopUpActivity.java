@@ -150,12 +150,19 @@ public class TopUpActivity extends Activity implements NfcAdapter.CreateNdefMess
         // start progress dialog
         // ActivityUtils.showProgressDialog(this, "Please wait...");
 
-        // toast to notify wait
-        Toast.makeText(this, "We will notify you once transaction done", Toast.LENGTH_LONG).show();
+        // need to run on UI thread since beam touch involved here
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                // toast to notify wait
+                Toast.makeText(TopUpActivity.this, "We will notify you once transaction done", Toast.LENGTH_LONG).show();
 
-        // exit from activity
-        TopUpActivity.this.finish();
-        TopUpActivity.this.overridePendingTransition(R.anim.stay_in, R.anim.bottom_out);
+                // exit from activity
+                TopUpActivity.this.finish();
+                TopUpActivity.this.overridePendingTransition(R.anim.stay_in, R.anim.bottom_out);
+            }
+        });
+
     }
 
     /**
