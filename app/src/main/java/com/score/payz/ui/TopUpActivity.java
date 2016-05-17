@@ -145,6 +145,8 @@ public class TopUpActivity extends Activity implements NfcAdapter.CreateNdefMess
      */
     @Override
     public void onNdefPushComplete(NfcEvent event) {
+        Log.d(TAG, "NFC push completed");
+
         // start progress dialog
         // ActivityUtils.showProgressDialog(this, "Please wait...");
 
@@ -152,8 +154,8 @@ public class TopUpActivity extends Activity implements NfcAdapter.CreateNdefMess
         Toast.makeText(this, "We will notify you once transaction done", Toast.LENGTH_LONG).show();
 
         // exit from activity
-        this.finish();
-        this.overridePendingTransition(R.anim.stay_in, R.anim.bottom_out);
+        TopUpActivity.this.finish();
+        TopUpActivity.this.overridePendingTransition(R.anim.stay_in, R.anim.bottom_out);
     }
 
     /**

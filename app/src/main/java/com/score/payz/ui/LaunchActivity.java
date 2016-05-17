@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import com.score.payz.R;
 import com.score.payz.exceptions.NoUserException;
+import com.score.payz.services.RemoteSenzService;
 import com.score.payz.utils.PreferenceUtils;
 
 /**
@@ -25,6 +26,9 @@ public class LaunchActivity extends Activity {
         try {
             PreferenceUtils.getUser(this);
 
+            // start service
+            initSenzService();
+
             // have user, so move to home
             Intent intent = new Intent(this, HomeActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -39,5 +43,14 @@ public class LaunchActivity extends Activity {
             finish();
             startActivity(intent);
         }
+    }
+
+    /**
+     * Initialize senz service
+     */
+    private void initSenzService() {
+        // start service from here
+        Intent serviceIntent = new Intent(this, RemoteSenzService.class);
+        startService(serviceIntent);
     }
 }
