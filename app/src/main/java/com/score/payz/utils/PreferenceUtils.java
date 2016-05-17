@@ -3,9 +3,9 @@ package com.score.payz.utils;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import com.score.senzc.pojos.User;
 import com.score.payz.R;
 import com.score.payz.exceptions.NoUserException;
+import com.score.senzc.pojos.User;
 
 /**
  * Utility class to deal with Share Preferences
@@ -47,6 +47,34 @@ public class PreferenceUtils {
         User user = new User(id, username);
         user.setUsername(username);
         return user;
+    }
+
+    /**
+     * Save image as BASE64 encoded string
+     *
+     * @param context      context
+     * @param encodedImage encoded image
+     */
+    public static void saveUserImage(Context context, String encodedImage) {
+        SharedPreferences preferences = context.getSharedPreferences(context.getString(R.string.preference_file_key), Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+
+        //keys should be constants as well, or derived from a constant prefix in a loop.
+        editor.putString("USER_IMAGE", encodedImage);
+        editor.commit();
+    }
+
+    /**
+     * Get saved image string
+     *
+     * @param context context
+     * @return BASE64 encoded image string
+     */
+    public static String getUserImage(Context context) {
+        SharedPreferences preferences = context.getSharedPreferences(context.getString(R.string.preference_file_key), Context.MODE_PRIVATE);
+        String encodedImage = preferences.getString("USER_IMAGE", "");
+
+        return encodedImage;
     }
 
     /**

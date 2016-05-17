@@ -14,11 +14,13 @@ import android.nfc.Tag;
 import android.nfc.tech.NfcF;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.provider.MediaStore;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
+import android.util.Base64;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -31,12 +33,16 @@ import android.widget.Toast;
 
 import com.github.siyamed.shapeimageview.CircularImageView;
 import com.score.payz.R;
+import com.score.payz.exceptions.NoUserException;
 import com.score.payz.pojos.DrawerItem;
 import com.score.payz.pojos.Payz;
 import com.score.payz.utils.JSONUtils;
+import com.score.payz.utils.PreferenceUtils;
+import com.score.senzc.pojos.User;
 
 import org.json.JSONException;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 
 /**
@@ -152,6 +158,26 @@ public class HomeActivity extends FragmentActivity {
      * {@inheritDoc}
      */
     @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1888 && resultCode == -1) {
+            Bitmap photo = (Bitmap) data.getExtras().get("data");
+            userImage.setImageBitmap(photo);
+
+            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+            photo.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
+            byte[] byteStream = byteArrayOutputStream.toByteArray();
+            String encodedData = Base64.encodeToString(byteStream, Base64.DEFAULT);
+
+            // save image in shared preference
+            PreferenceUtils.saveUserImage(this, encodedData);
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     protected void onDestroy() {
         super.onDestroy();
     }
@@ -218,15 +244,44 @@ public class HomeActivity extends FragmentActivity {
         drawerLayout.setDrawerListener(homeActionBarDrawerToggle);
     }
 
+    /**
+     * Initialize drawer user image
+     */
     private void initDrawerUser() {
-        userImage = (CircularImageView) findViewById(R.id.contact_image);
-        Bitmap largeIcon = BitmapFactory.decodeResource(getResources(), R.drawable.default_user_icon);
-        userImage.setImageBitmap(largeIcon);
-
         typeface = Typeface.createFromAsset(getAssets(), "fonts/vegur_2.otf");
+
+        userImage = (CircularImageView) findViewById(R.id.contact_image);
         username = (TextView) findViewById(R.id.home_user_text);
-        username.setText("@eranga");
-        username.setTypeface(typeface, Typeface.BOLD);
+
+        // find image from shared preference and display it
+        String encodedImage = PreferenceUtils.getUserImage(this);
+        if (!encodedImage.isEmpty()) {
+            byte[] decodedString = Base64.decode(encodedImage, Base64.DEFAULT);
+            Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+            userImage.setImageBitmap(decodedByte);
+        } else {
+            Bitmap largeIcon = BitmapFactory.decodeResource(getResources(), R.drawable.default_user_icon);
+            userImage.setImageBitmap(largeIcon);
+        }
+
+        // launch camera to selfie
+        userImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent camera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                camera.putExtra("android.intent.extras.CAMERA_FACING", 1);
+                startActivityForResult(camera, 1888);
+            }
+        });
+
+        // display username
+        try {
+            User user = PreferenceUtils.getUser(this);
+            username.setText("@" + user.getUsername());
+            username.setTypeface(typeface, Typeface.BOLD);
+        } catch (NoUserException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
