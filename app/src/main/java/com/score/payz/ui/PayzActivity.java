@@ -289,8 +289,8 @@ public class PayzActivity extends Activity implements View.OnClickListener {
                 // launch Matm activity
                 Intent mapIntent = new Intent(this, MatmActivity.class);
                 mapIntent.putExtra("EXTRA", matm);
-                this.finish();
                 startActivity(mapIntent);
+                this.finish();
                 overridePendingTransition(R.anim.stay_in, R.anim.right_in);
             }
         }

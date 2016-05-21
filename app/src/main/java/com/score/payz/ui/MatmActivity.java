@@ -95,7 +95,7 @@ public class MatmActivity extends Activity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
 
         getWindow().requestFeature(Window.FEATURE_ACTION_BAR_OVERLAY);
-        setContentView(R.layout.payz_activity_layout);
+        setContentView(R.layout.matm_layout);
 
         initUi();
         initActionBar();
@@ -170,7 +170,7 @@ public class MatmActivity extends Activity implements View.OnClickListener {
                 Log.i(TAG, "Matm tid :" + matm.gettId());
                 Log.i(TAG, "Matm key :" + matm.getKey());
 
-                payAmountText.setText("$" + matm.getKey());
+                payAmountText.setText(matm.getKey());
             }
         }
     }
