@@ -23,6 +23,7 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.score.payz.R;
 import com.score.payz.pojos.Matm;
@@ -370,7 +371,8 @@ public class PayzActivity extends Activity implements View.OnClickListener {
                 // do transaction
                 dialog.cancel();
 
-                ActivityUtils.showProgressDialog(PayzActivity.this, "Please wait...");
+                //ActivityUtils.showProgressDialog(PayzActivity.this, "Please wait...");
+                Toast.makeText(PayzActivity.this, "Please wait", Toast.LENGTH_LONG).show();
 
                 // start new timer
                 isResponseReceived = false;
