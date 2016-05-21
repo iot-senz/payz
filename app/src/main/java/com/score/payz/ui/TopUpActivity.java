@@ -156,13 +156,12 @@ public class TopUpActivity extends Activity implements NfcAdapter.CreateNdefMess
             public void run() {
                 // toast to notify wait
                 Toast.makeText(TopUpActivity.this, "We will notify you once transaction done", Toast.LENGTH_LONG).show();
-
-                // exit from activity
-                TopUpActivity.this.finish();
-                TopUpActivity.this.overridePendingTransition(R.anim.stay_in, R.anim.bottom_out);
             }
         });
 
+        // exit from activity
+        TopUpActivity.this.finish();
+        TopUpActivity.this.overridePendingTransition(R.anim.stay_in, R.anim.bottom_out);
     }
 
     /**

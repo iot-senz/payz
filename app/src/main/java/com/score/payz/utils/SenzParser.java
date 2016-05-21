@@ -1,5 +1,6 @@
 package com.score.payz.utils;
 
+import com.score.payz.pojos.Matm;
 import com.score.senzc.enums.SenzTypeEnum;
 import com.score.senzc.pojos.Senz;
 import com.score.senzc.pojos.User;
@@ -55,13 +56,6 @@ public class SenzParser {
             }
         }
 
-//        System.out.println(senz.getSender());
-//        System.out.println(senz.getReceiver());
-//        System.out.println(senz.getSenzType());
-//        System.out.println(senz.getSignature());
-//        System.out.println(senz.getAttributes().entrySet());
-//        System.out.println("------------");
-
         return senz;
     }
 
@@ -94,6 +88,14 @@ public class SenzParser {
         System.out.println((senzMessage.replaceAll("\n", "").replaceAll("\r", "")).getBytes().length);
 
         return senzMessage.replaceAll("\n", "").replaceAll("\r", "");
+    }
+
+    public static Matm getMatm(Senz senz) {
+        String tId = senz.getAttributes().get("tid");
+        String key = senz.getAttributes().get("key");
+        String user = senz.getReceiver().getUsername();
+
+        return new Matm(tId, key);
     }
 
     public static void main(String args[]) {

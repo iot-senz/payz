@@ -41,10 +41,11 @@
                 android:layout_marginRight="20dp"
                 android:layout_marginTop="10dp"
                 android:gravity="center"
-                android:text="You gonna Top up $20.00 \namount with PayZ. Please tap tap your phone to NFC pad"
+                android:text="You gonna make Top Up \n with PayZ. Please tap your phone to NFC pad"
                 android:textColor="#fff"
                 android:textSize="20sp"
-                android:visibility="visible"></TextView>
+                android:visibility="visible">
+            </TextView>
 
             <RelativeLayout
                 android:layout_width="match_parent"

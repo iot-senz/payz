@@ -10,7 +10,8 @@
     <FrameLayout
         android:id="@+id/main"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></FrameLayout>
+        android:layout_height="match_parent">
+    </FrameLayout>
 
     <!-- The navigation drawer -->
     <RelativeLayout
@@ -66,7 +67,8 @@
                 android:layout_alignParentBottom="true"
                 android:layout_marginBottom="1dp"
                 android:layout_marginTop="1dp"
-                android:background="#DADADC"></View>
+                android:background="#DADADC">
+            </View>
         </RelativeLayout>
 
         <ListView

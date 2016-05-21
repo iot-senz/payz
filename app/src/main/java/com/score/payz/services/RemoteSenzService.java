@@ -13,10 +13,6 @@ import android.os.IBinder;
 import android.os.RemoteException;
 import android.util.Log;
 
-import com.score.senz.ISenzService;
-import com.score.senzc.enums.SenzTypeEnum;
-import com.score.senzc.pojos.Senz;
-import com.score.senzc.pojos.User;
 import com.score.payz.exceptions.NoUserException;
 import com.score.payz.handlers.SenzHandler;
 import com.score.payz.listeners.ShareSenzListener;
@@ -25,6 +21,10 @@ import com.score.payz.utils.NetworkUtil;
 import com.score.payz.utils.PreferenceUtils;
 import com.score.payz.utils.RSAUtils;
 import com.score.payz.utils.SenzParser;
+import com.score.senz.ISenzService;
+import com.score.senzc.enums.SenzTypeEnum;
+import com.score.senzc.pojos.Senz;
+import com.score.senzc.pojos.User;
 
 import java.io.IOException;
 import java.net.DatagramPacket;
@@ -52,6 +52,7 @@ public class RemoteSenzService extends Service implements ShareSenzListener {
     //private static final String SENZ_HOST = "192.168.43.42";
     //private static final String SENZ_HOST = "10.4.1.29";
     private static final String SENZ_HOST = "192.168.1.125";
+    //private static final String SENZ_HOST = "172.22.252.195";
     private static final int SENZ_PORT = 9090;
 
     // we are listing for UDP socket

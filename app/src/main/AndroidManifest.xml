@@ -44,7 +44,8 @@
             android:configChanges="orientation"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Holo.NoActionBar"></activity>
+            android:theme="@android:style/Theme.Holo.NoActionBar">
+        </activity>
 
         <activity
             android:name=".ui.HomeActivity"
@@ -66,14 +67,24 @@
             android:label="@string/title_activity_pay"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Holo.Light.DarkActionBar"></activity>
+            android:theme="@android:style/Theme.Holo.Light.DarkActionBar">
+        </activity>
+
+        <activity
+            android:name=".ui.MatmActivity"
+            android:label="@string/title_activity_pay"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Holo.Light.DarkActionBar">
+        </activity>
 
         <activity
             android:name=".ui.TopUpActivity"
             android:label="@string/title_activity_pay"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Holo.Light.DarkActionBar"></activity>
+            android:theme="@android:style/Theme.Holo.Light.DarkActionBar">
+        </activity>
 
         <service
             android:name="com.score.payz.services.RemoteSenzService"

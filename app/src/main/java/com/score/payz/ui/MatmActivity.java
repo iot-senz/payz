@@ -23,10 +23,10 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.score.payz.R;
 import com.score.payz.pojos.Matm;
-import com.score.payz.pojos.Payz;
 import com.score.payz.utils.ActivityUtils;
 import com.score.payz.utils.NetworkUtil;
 import com.score.payz.utils.SenzParser;
@@ -37,7 +37,7 @@ import com.score.senzc.pojos.User;
 
 import java.util.HashMap;
 
-public class PayzActivity extends Activity implements View.OnClickListener {
+public class MatmActivity extends Activity implements View.OnClickListener {
 
     private static final String TAG = PayzActivity.class.getName();
 
@@ -60,7 +60,7 @@ public class PayzActivity extends Activity implements View.OnClickListener {
     private boolean isServiceBound;
 
     // activity deal with payz
-    private Payz payz;
+    private Matm matm;
 
     // service connection
     private ServiceConnection senzServiceConnection = new ServiceConnection() {
@@ -139,7 +139,7 @@ public class PayzActivity extends Activity implements View.OnClickListener {
         payAmountText.setTypeface(typeface, Typeface.BOLD);
 
         accept = (RelativeLayout) findViewById(R.id.pay_amount_relative_layout);
-        accept.setOnClickListener(PayzActivity.this);
+        accept.setOnClickListener(MatmActivity.this);
     }
 
     private void initActionBar() {
@@ -164,14 +164,13 @@ public class PayzActivity extends Activity implements View.OnClickListener {
     private void initPay() {
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
-            payz = bundle.getParcelable("EXTRA");
+            matm = bundle.getParcelable("EXTRA");
 
-            if (payz != null) {
-                Log.i(TAG, "Pay account :" + payz.getAccount());
-                Log.i(TAG, "Pay amount :" + payz.getAmount());
-                Log.i(TAG, "Pay time :" + payz.getTime());
+            if (matm != null) {
+                Log.i(TAG, "Matm tid :" + matm.gettId());
+                Log.i(TAG, "Matm key :" + matm.getKey());
 
-                payAmountText.setText("$" + payz.getAmount());
+                payAmountText.setText("$" + matm.getKey());
             }
         }
     }
@@ -199,7 +198,7 @@ public class PayzActivity extends Activity implements View.OnClickListener {
         ActivityUtils.hideSoftKeyboard(this);
 
         if (NetworkUtil.isAvailableNetwork(this)) {
-            displayInformationMessageDialog("Are you sure you want to pay the amount " + payz.getAmount() + "$");
+            //displayInformationMessageDialog("Are you sure you want to pay the amount " + payz.getAmount() + "$");
         } else {
             displayMessageDialog("#ERROR", "No network connection");
         }
@@ -215,8 +214,8 @@ public class PayzActivity extends Activity implements View.OnClickListener {
 
     private Senz createPutSenz() {
         HashMap<String, String> senzAttributes = new HashMap<>();
-        senzAttributes.put("amnt", payz.getAmount());
-        senzAttributes.put("acc", payz.getAccount());
+        senzAttributes.put("tid", matm.gettId());
+        senzAttributes.put("key", matm.getKey());
         senzAttributes.put("time", ((Long) (System.currentTimeMillis() / 1000)).toString());
 
         // new senz
@@ -253,7 +252,7 @@ public class PayzActivity extends Activity implements View.OnClickListener {
 
         @Override
         public void onFinish() {
-            ActivityUtils.hideSoftKeyboard(PayzActivity.this);
+            ActivityUtils.hideSoftKeyboard(MatmActivity.this);
             ActivityUtils.cancelProgressDialog();
 
             // display message dialog that we couldn't reach the user
@@ -287,11 +286,22 @@ public class PayzActivity extends Activity implements View.OnClickListener {
                 Matm matm = SenzParser.getMatm(senz);
 
                 // launch Matm activity
-                Intent mapIntent = new Intent(this, MatmActivity.class);
-                mapIntent.putExtra("EXTRA", matm);
-                this.finish();
-                startActivity(mapIntent);
-                overridePendingTransition(R.anim.stay_in, R.anim.right_in);
+
+                String msg = senz.getAttributes().get("msg");
+                if (msg != null && msg.equalsIgnoreCase("PUTDONE")) {
+                    Toast.makeText(this, "Payment successful", Toast.LENGTH_LONG).show();
+
+                    // exit from the activity
+                    this.finish();
+                    this.overridePendingTransition(R.anim.stay_in, R.anim.bottom_out);
+
+                    // save transaction in db
+//                    if (matm != null)
+//                        new PayzDbSource(MatmActivity.this).createPayz(payz);
+                } else {
+                    String informationMessage = "Failed to complete the payment";
+                    displayMessageDialog("ERROR", informationMessage);
+                }
             }
         }
     }
@@ -370,7 +380,7 @@ public class PayzActivity extends Activity implements View.OnClickListener {
                 // do transaction
                 dialog.cancel();
 
-                ActivityUtils.showProgressDialog(PayzActivity.this, "Please wait...");
+                ActivityUtils.showProgressDialog(MatmActivity.this, "Please wait...");
 
                 // start new timer
                 isResponseReceived = false;
