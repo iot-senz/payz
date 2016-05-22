@@ -3,6 +3,10 @@ package com.score.payz.ui;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
@@ -20,8 +24,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.score.payz.R;
+import com.score.payz.pojos.Matm;
 import com.score.payz.pojos.TopUp;
+import com.score.payz.utils.ActivityUtils;
 import com.score.payz.utils.JSONUtils;
+import com.score.payz.utils.SenzParser;
+import com.score.senzc.pojos.Senz;
 
 import org.json.JSONException;
 
@@ -43,6 +51,15 @@ public class TopUpActivity extends Activity implements NfcAdapter.CreateNdefMess
     // activity deal with TopUp object
     private TopUp topUp;
 
+    // senz message receiver
+    private BroadcastReceiver senzMessageReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            Log.d(TAG, "Got message from Senz service");
+            handleSenzMessage(intent);
+        }
+    };
+
     /**
      * {@inheritDoc}
      */
@@ -57,6 +74,18 @@ public class TopUpActivity extends Activity implements NfcAdapter.CreateNdefMess
         initUi();
         initActionBar();
         initTopUp();
+
+        // register broadcast receiver
+        registerReceiver(senzMessageReceiver, new IntentFilter("com.score.payz.DATA_SENZ"));
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(senzMessageReceiver);
     }
 
     /**
@@ -155,13 +184,9 @@ public class TopUpActivity extends Activity implements NfcAdapter.CreateNdefMess
             @Override
             public void run() {
                 // toast to notify wait
-                Toast.makeText(TopUpActivity.this, "We will notify you once transaction done", Toast.LENGTH_LONG).show();
+                Toast.makeText(TopUpActivity.this, "Please wait", Toast.LENGTH_LONG).show();
             }
         });
-
-        // exit from activity
-        TopUpActivity.this.finish();
-        TopUpActivity.this.overridePendingTransition(R.anim.stay_in, R.anim.bottom_out);
     }
 
     /**
@@ -171,6 +196,35 @@ public class TopUpActivity extends Activity implements NfcAdapter.CreateNdefMess
     public void onBackPressed() {
         super.onBackPressed();
         this.overridePendingTransition(R.anim.stay_in, R.anim.bottom_out);
+    }
+
+    /**
+     * Handle broadcast message receives
+     * Need to handle registration success failure here
+     *
+     * @param intent intent
+     */
+    private void handleSenzMessage(Intent intent) {
+        String action = intent.getAction();
+
+        if (action.equals("com.score.payz.DATA_SENZ")) {
+            Senz senz = intent.getExtras().getParcelable("SENZ");
+
+            if (senz.getAttributes().containsKey("tid") && senz.getAttributes().containsKey("key")) {
+                // Matm response received
+                ActivityUtils.cancelProgressDialog();
+
+                // create Matm object from senz
+                Matm matm = SenzParser.getMatm(senz);
+
+                // launch Matm activity
+                Intent mapIntent = new Intent(this, MatmActivity.class);
+                mapIntent.putExtra("EXTRA", matm);
+                startActivity(mapIntent);
+                this.finish();
+                overridePendingTransition(R.anim.stay_in, R.anim.right_in);
+            }
+        }
     }
 
     /**
