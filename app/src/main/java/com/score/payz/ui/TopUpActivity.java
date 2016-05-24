@@ -218,9 +218,9 @@ public class TopUpActivity extends Activity implements NfcAdapter.CreateNdefMess
                 Matm matm = SenzParser.getMatm(senz);
 
                 // launch Matm activity
-                Intent mapIntent = new Intent(this, MatmActivity.class);
-                mapIntent.putExtra("EXTRA", matm);
-                startActivity(mapIntent);
+                Intent matmIntent = new Intent(this, MatmActivity.class);
+                matmIntent.putExtra("EXTRA_MATM", matm);
+                startActivity(matmIntent);
                 this.finish();
                 overridePendingTransition(R.anim.stay_in, R.anim.right_in);
             }

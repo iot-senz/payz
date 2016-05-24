@@ -32,7 +32,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.score.payz.R;
+import com.score.payz.db.PayzDbSource;
 import com.score.payz.pojos.Matm;
+import com.score.payz.pojos.Payz;
 import com.score.payz.utils.ActivityUtils;
 import com.score.senz.ISenzService;
 import com.score.senzc.enums.SenzTypeEnum;
@@ -70,6 +72,7 @@ public class MatmActivity extends Activity implements NfcAdapter.CreateNdefMessa
 
     // activity deal with Matm
     private Matm thisMatm;
+    private Payz thisPayz;
     private String receivedKey;
 
     // service connection
@@ -110,7 +113,7 @@ public class MatmActivity extends Activity implements NfcAdapter.CreateNdefMessa
         initNfc();
         initUi();
         initActionBar();
-        initMatm();
+        initExtras();
 
         // service
         senzService = null;
@@ -280,10 +283,11 @@ public class MatmActivity extends Activity implements NfcAdapter.CreateNdefMessa
         actionBar.setIcon(new ColorDrawable(getResources().getColor(android.R.color.transparent)));
     }
 
-    private void initMatm() {
+    private void initExtras() {
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
-            thisMatm = bundle.getParcelable("EXTRA");
+            thisMatm = bundle.getParcelable("EXTRA_MATM");
+            thisPayz = bundle.getParcelable("EXTRA_PAYZ");
 
             if (thisMatm != null) {
                 Log.i(TAG, "Matm tid :" + thisMatm.gettId());
@@ -393,6 +397,9 @@ public class MatmActivity extends Activity implements NfcAdapter.CreateNdefMessa
                 String msg = senz.getAttributes().get("msg");
                 if (msg != null && msg.equalsIgnoreCase("DONE")) {
                     Toast.makeText(this, "Payment successful", Toast.LENGTH_LONG).show();
+
+                    // save payz in db
+                    if (thisPayz != null) new PayzDbSource(this).createPayz(thisPayz);
 
                     // exit from activity
                     this.finish();
