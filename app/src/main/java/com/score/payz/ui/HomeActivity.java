@@ -124,32 +124,32 @@ public class HomeActivity extends FragmentActivity {
     @Override
     public void onNewIntent(Intent intent) {
         String action = intent.getAction();
-        Tag tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
-
         Log.d(TAG, "New intent action " + action);
-        Log.d(TAG, "New intent tag " + tag.toString());
 
-        // parse through all NDEF messages and their records and pick text type only
-        // we only send one NDEF message(as a JSON string)
-        Parcelable[] data = intent.getParcelableArrayExtra(NfcAdapter.EXTRA_NDEF_MESSAGES);
-        if (data != null) {
-            NdefMessage message = (NdefMessage) data[0];
-            String jsonString = new String(message.getRecords()[0].getPayload());
-            Log.d(TAG, "NFC Data received, " + jsonString);
+        if (action.equals(NfcAdapter.ACTION_TAG_DISCOVERED) || action.equals(NfcAdapter.ACTION_TECH_DISCOVERED)
+                || action.equals(NfcAdapter.ACTION_NDEF_DISCOVERED)) {
+            // parse through all NDEF messages and their records and pick text type only
+            // we only send one NDEF message(as a JSON string)
+            Parcelable[] data = intent.getParcelableArrayExtra(NfcAdapter.EXTRA_NDEF_MESSAGES);
+            if (data != null) {
+                NdefMessage message = (NdefMessage) data[0];
+                String jsonString = new String(message.getRecords()[0].getPayload());
+                Log.d(TAG, "NFC Data received, " + jsonString);
 
-            try {
-                // parse JSON and get Pay
-                Payz payz = JSONUtils.getPay(jsonString);
+                try {
+                    // parse JSON and get Pay
+                    Payz payz = JSONUtils.getPay(jsonString);
 
-                // launch pay activity
-                Intent mapIntent = new Intent(this, PayzActivity.class);
-                mapIntent.putExtra("EXTRA", payz);
-                startActivity(mapIntent);
-                overridePendingTransition(R.anim.bottom_in, R.anim.stay_in);
-            } catch (JSONException e) {
-                e.printStackTrace();
+                    // launch pay activity
+                    Intent mapIntent = new Intent(this, PayzActivity.class);
+                    mapIntent.putExtra("EXTRA", payz);
+                    startActivity(mapIntent);
+                    overridePendingTransition(R.anim.bottom_in, R.anim.stay_in);
+                } catch (JSONException e) {
+                    e.printStackTrace();
 
-                Toast.makeText(this, "[ERROR] Invalid data", Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, "[ERROR] Invalid data", Toast.LENGTH_LONG).show();
+                }
             }
         }
     }
