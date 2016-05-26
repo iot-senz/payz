@@ -41,7 +41,7 @@
                 android:layout_marginRight="20dp"
                 android:layout_marginTop="10dp"
                 android:gravity="center"
-                android:text="You gonna make Top Up \n with PayZ. Please tap your phone to NFC pad"
+                android:text="You are making \n Top Up with PayZ. Please touch vendors device"
                 android:textColor="#fff"
                 android:textSize="20sp"
                 android:visibility="visible">

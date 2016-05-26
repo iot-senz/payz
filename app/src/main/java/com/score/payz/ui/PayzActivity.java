@@ -200,7 +200,7 @@ public class PayzActivity extends Activity implements View.OnClickListener {
         ActivityUtils.hideSoftKeyboard(this);
 
         if (NetworkUtil.isAvailableNetwork(this)) {
-            displayInformationMessageDialog("Are you sure you want to pay the amount " + payz.getAmount() + "$");
+            displayInformationMessageDialog("Please confirm your payment of $" + payz.getAmount());
         } else {
             displayMessageDialog("#ERROR", "No network connection");
         }
