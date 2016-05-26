@@ -10,7 +10,6 @@ import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
 import android.nfc.NdefMessage;
 import android.nfc.NfcAdapter;
-import android.nfc.Tag;
 import android.nfc.tech.NfcF;
 import android.os.Bundle;
 import android.os.Parcelable;
@@ -394,7 +393,7 @@ public class HomeActivity extends FragmentActivity {
                 Bitmap largeIcon = BitmapFactory.decodeResource(getResources(), R.drawable.settings_icon);
                 //userImage.setImageBitmap(largeIcon);
 
-                loadFragment(new HistoryFragment());
+                loadFragment(new PayzScannerFragment());
             }
 
             drawerAdapter.notifyDataSetChanged();

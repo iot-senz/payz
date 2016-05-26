@@ -49,13 +49,13 @@ public class JSONUtils {
 
     /**
      * Get current date and time as transaction time
-     * format - yyyy/MM/dd HH:mm:ss
+     * format - yyyy:MM:dd HH:mm:ss
      *
      * @return
      */
     private static String getCurrentTime() {
         //date format
-        String DATE_FORMAT_NOW = "yyyy/MM/dd HH:mm:ss";
+        String DATE_FORMAT_NOW = "yyyy.MM.dd HH:mm:ss";
 
         // generate time
         Calendar calendar = Calendar.getInstance();
