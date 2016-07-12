@@ -148,9 +148,9 @@ public class MatmActivity extends Activity implements NfcAdapter.CreateNdefMessa
         super.onResume();
 
         // enable foreground dispatch
-        if (nfcAdapter != null) {
-            nfcAdapter.enableForegroundDispatch(this, nfcPendingIntent, nfcIntentFilters, nfcTechLists);
-        }
+//        if (nfcAdapter != null) {
+//            nfcAdapter.enableForegroundDispatch(this, nfcPendingIntent, nfcIntentFilters, nfcTechLists);
+//        }
     }
 
     /**
@@ -163,30 +163,6 @@ public class MatmActivity extends Activity implements NfcAdapter.CreateNdefMessa
         // disable foreground dispatch
         if (nfcAdapter != null)
             nfcAdapter.disableForegroundDispatch(this);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void onNewIntent(Intent intent) {
-        String action = intent.getAction();
-        Log.d(TAG, "New intent action " + action);
-
-        if (action.equals(NfcAdapter.ACTION_TAG_DISCOVERED) || action.equals(NfcAdapter.ACTION_TECH_DISCOVERED)
-                || action.equals(NfcAdapter.ACTION_NDEF_DISCOVERED)) {
-            // parse through all NDEF messages and their records and pick text type only
-            // we only send one NDEF message(as a JSON string)
-            Parcelable[] data = intent.getParcelableArrayExtra(NfcAdapter.EXTRA_NDEF_MESSAGES);
-            if (data != null) {
-                NdefMessage message = (NdefMessage) data[0];
-                receivedKey = new String(message.getRecords()[0].getPayload());
-                Log.d(TAG, "NFC Data received, " + receivedKey);
-
-                // TODO process receive data
-                onClickPut();
-            }
-        }
     }
 
     /**
@@ -216,7 +192,7 @@ public class MatmActivity extends Activity implements NfcAdapter.CreateNdefMessa
                 //ActivityUtils.showProgressDialog(this, "Please wait...");
 
                 // toast to notify wait
-                Toast.makeText(MatmActivity.this, "Please wait", Toast.LENGTH_LONG).show();
+                //Toast.makeText(MatmActivity.this, "Please wait", Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -230,24 +206,8 @@ public class MatmActivity extends Activity implements NfcAdapter.CreateNdefMessa
         if (nfcAdapter == null) {
             Toast.makeText(this, "[ERROR] No NFC supported", Toast.LENGTH_LONG).show();
         } else {
-            // set listeners to receive data
             nfcAdapter.setNdefPushMessageCallback(this, this);
             nfcAdapter.setOnNdefPushCompleteCallback(this, this);
-
-            // create an intent with tag data and deliver to this activity
-            nfcPendingIntent = PendingIntent.getActivity(this, 0, new Intent(this, getClass()).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0);
-
-            // set an intent filter for all MIME data
-            IntentFilter nfcDiscoveredIntentFilter = new IntentFilter(NfcAdapter.ACTION_NDEF_DISCOVERED);
-            try {
-                nfcDiscoveredIntentFilter.addDataType("text/plain");
-                nfcIntentFilters = new IntentFilter[]{nfcDiscoveredIntentFilter};
-            } catch (Exception e) {
-                Log.e("TagDispatch", e.toString());
-            }
-
-            // tech list
-            nfcTechLists = new String[][]{new String[]{NfcF.class.getName()}};
         }
     }
 

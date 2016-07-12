@@ -42,7 +42,7 @@
                 android:layout_centerInParent="true"
                 android:layout_marginLeft="38dp"
                 android:layout_toRightOf="@+id/transaction_icon"
-                android:text="10$"
+                android:text="$10"
                 android:textColor="#d26c6c"
                 android:textSize="35sp" />
         </RelativeLayout>
@@ -77,7 +77,7 @@
                 android:layout_centerInParent="true"
                 android:layout_marginLeft="38dp"
                 android:layout_toRightOf="@+id/summary_icon"
-                android:text="20$"
+                android:text="$20"
                 android:textColor="#d26c6c"
                 android:textSize="35sp" />
         </RelativeLayout>
@@ -113,7 +113,7 @@
                 android:layout_centerInParent="true"
                 android:layout_marginLeft="38dp"
                 android:layout_toRightOf="@+id/settings_icon"
-                android:text="50$"
+                android:text="$50"
                 android:textColor="#d26c6c"
                 android:textSize="35sp" />
         </RelativeLayout>
@@ -149,7 +149,7 @@
                 android:layout_centerInParent="true"
                 android:layout_marginLeft="38dp"
                 android:layout_toRightOf="@+id/transaction_icon1"
-                android:text="100$"
+                android:text="$100"
                 android:textColor="#d26c6c"
                 android:textSize="35sp" />
         </RelativeLayout>
@@ -184,7 +184,7 @@
                 android:layout_centerInParent="true"
                 android:layout_marginLeft="38dp"
                 android:layout_toRightOf="@+id/transaction_icon2"
-                android:text="200$"
+                android:text="$200"
                 android:textColor="#d26c6c"
                 android:textSize="35sp" />
         </RelativeLayout>

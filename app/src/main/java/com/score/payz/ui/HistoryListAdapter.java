@@ -104,7 +104,7 @@ public class HistoryListAdapter extends BaseAdapter {
         // bind text with view holder content view for efficient use
         holder.iconText.setText("$");
         holder.name.setText(payz.getTime());
-        holder.amount.setText(payz.getAmount() + " $");
+        holder.amount.setText("$ " + payz.getAmount());
         //view.setBackgroundResource(R.drawable.more_layout_selector_normal);
 
         return view;
