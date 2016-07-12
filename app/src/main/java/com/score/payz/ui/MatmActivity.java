@@ -161,8 +161,8 @@ public class MatmActivity extends Activity implements NfcAdapter.CreateNdefMessa
         super.onPause();
 
         // disable foreground dispatch
-        if (nfcAdapter != null)
-            nfcAdapter.disableForegroundDispatch(this);
+//        if (nfcAdapter != null)
+//            nfcAdapter.disableForegroundDispatch(this);
     }
 
     /**
