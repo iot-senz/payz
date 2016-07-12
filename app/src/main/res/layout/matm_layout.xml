@@ -41,7 +41,7 @@
                 android:layout_marginRight="20dp"
                 android:layout_marginTop="10dp"
                 android:gravity="center"
-                android:text="Please touch vendors \n device in order to confirm that you are paying to the vendor"
+                android:text="Please touch vendor's \n device to confirm your payment to the vendor."
                 android:textColor="#fff"
                 android:textSize="20sp"
                 android:visibility="visible">

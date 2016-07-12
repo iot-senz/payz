@@ -41,7 +41,7 @@
                 android:layout_marginRight="20dp"
                 android:layout_marginTop="10dp"
                 android:gravity="center"
-                android:text="You are making \n Top Up with PayZ. Please touch vendors device"
+                android:text="You are making a topup \n with PayZ. Please touch vendor's device to do the topup."
                 android:textColor="#fff"
                 android:textSize="20sp"
                 android:visibility="visible">
