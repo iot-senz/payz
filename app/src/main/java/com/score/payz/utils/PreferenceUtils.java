@@ -127,4 +127,21 @@ public class PreferenceUtils {
         return preferences.getString("PRINTER_ADDRESS", "");
     }
 
+    public static void updateBalance(Context context, int amount) {
+        SharedPreferences preferences = context.getSharedPreferences(context.getString(R.string.preference_file_key), Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+
+        // update balance
+        int balance = preferences.getInt("BALANCE", 50);
+        editor.putInt("BALANCE", balance + amount);
+        editor.commit();
+    }
+
+    public static int getBalance(Context context) {
+        SharedPreferences preferences = context.getSharedPreferences(context.getString(R.string.preference_file_key), Context.MODE_PRIVATE);
+        int balance = preferences.getInt("BALANCE", 50);
+
+        return balance;
+    }
+
 }

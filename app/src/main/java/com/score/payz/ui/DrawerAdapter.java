@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.score.payz.R;
 import com.score.payz.pojos.DrawerItem;
+import com.score.payz.utils.PreferenceUtils;
 
 import java.util.ArrayList;
 
@@ -129,6 +130,7 @@ public class DrawerAdapter extends BaseAdapter {
 
         // bind text with view holder content view for efficient use
         holder.name.setText(item.getName());
+        holder.desc.setText("$" + PreferenceUtils.getBalance(context));
 
         return view;
     }

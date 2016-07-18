@@ -17,11 +17,9 @@ import android.nfc.NdefMessage;
 import android.nfc.NdefRecord;
 import android.nfc.NfcAdapter;
 import android.nfc.NfcEvent;
-import android.nfc.tech.NfcF;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.IBinder;
-import android.os.Parcelable;
 import android.os.RemoteException;
 import android.util.Log;
 import android.view.View;
@@ -36,6 +34,7 @@ import com.score.payz.db.PayzDbSource;
 import com.score.payz.pojos.Matm;
 import com.score.payz.pojos.Payz;
 import com.score.payz.utils.ActivityUtils;
+import com.score.payz.utils.PreferenceUtils;
 import com.score.senz.ISenzService;
 import com.score.senzc.enums.SenzTypeEnum;
 import com.score.senzc.pojos.Senz;
@@ -358,7 +357,16 @@ public class MatmActivity extends Activity implements NfcAdapter.CreateNdefMessa
                     Toast.makeText(this, "Payment successful", Toast.LENGTH_LONG).show();
 
                     // save payz in db
-                    if (thisPayz != null) new PayzDbSource(this).createPayz(thisPayz);
+                    if (thisPayz != null) {
+                        // save in db
+                        new PayzDbSource(this).createPayz(thisPayz);
+
+                        // update balance
+                        PreferenceUtils.updateBalance(MatmActivity.this, 0 - Integer.parseInt(thisPayz.getAmount()));
+                    } else {
+                        // update balance
+                        PreferenceUtils.updateBalance(MatmActivity.this, Integer.parseInt(thisPayz.getAmount()));
+                    }
 
                     // exit from activity
                     this.finish();
