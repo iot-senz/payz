@@ -211,7 +211,7 @@ public class PayzActivity extends Activity implements View.OnClickListener {
                 displayMessageDialog("ERROR", "No network connection");
             }
         } else {
-            displayMessageDialog("Low balance", "You don't have enough balance to do transaction, please topup your account first");
+            displayMessageDialog("Low balance", "You don't have enough balance to do this transaction, please topup your account first");
         }
 
     }
