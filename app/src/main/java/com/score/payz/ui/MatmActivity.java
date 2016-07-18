@@ -71,6 +71,7 @@ public class MatmActivity extends Activity implements NfcAdapter.CreateNdefMessa
     // activity deal with Matm
     private Matm thisMatm;
     private Payz thisPayz;
+    private String thisAmount;
     private String receivedKey;
 
     // service connection
@@ -246,6 +247,7 @@ public class MatmActivity extends Activity implements NfcAdapter.CreateNdefMessa
         if (bundle != null) {
             thisMatm = bundle.getParcelable("EXTRA_MATM");
             thisPayz = bundle.getParcelable("EXTRA_PAYZ");
+            thisAmount = bundle.getString("AMOUNT");
 
             if (thisMatm != null) {
                 Log.i(TAG, "Matm tid :" + thisMatm.gettId());
@@ -365,7 +367,7 @@ public class MatmActivity extends Activity implements NfcAdapter.CreateNdefMessa
                         PreferenceUtils.updateBalance(MatmActivity.this, 0 - Integer.parseInt(thisPayz.getAmount()));
                     } else {
                         // update balance
-                        PreferenceUtils.updateBalance(MatmActivity.this, Integer.parseInt(thisPayz.getAmount()));
+                        PreferenceUtils.updateBalance(MatmActivity.this, Integer.parseInt(thisAmount));
                     }
 
                     // exit from activity

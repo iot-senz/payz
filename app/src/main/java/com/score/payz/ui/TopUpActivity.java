@@ -220,6 +220,7 @@ public class TopUpActivity extends Activity implements NfcAdapter.CreateNdefMess
                 // launch Matm activity
                 Intent matmIntent = new Intent(this, MatmActivity.class);
                 matmIntent.putExtra("EXTRA_MATM", matm);
+                matmIntent.putExtra("AMOUNT", topUp.getAmount());
                 startActivity(matmIntent);
                 this.finish();
                 overridePendingTransition(R.anim.stay_in, R.anim.right_in);
