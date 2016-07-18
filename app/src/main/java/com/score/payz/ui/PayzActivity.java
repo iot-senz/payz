@@ -30,6 +30,7 @@ import com.score.payz.pojos.Matm;
 import com.score.payz.pojos.Payz;
 import com.score.payz.utils.ActivityUtils;
 import com.score.payz.utils.NetworkUtil;
+import com.score.payz.utils.PreferenceUtils;
 import com.score.payz.utils.SenzParser;
 import com.score.senz.ISenzService;
 import com.score.senzc.enums.SenzTypeEnum;
@@ -199,11 +200,20 @@ public class PayzActivity extends Activity implements View.OnClickListener {
     private void onClickPut() {
         ActivityUtils.hideSoftKeyboard(this);
 
-        if (NetworkUtil.isAvailableNetwork(this)) {
-            displayInformationMessageDialog("Please confirm your payment of $" + payz.getAmount());
+        int balance = PreferenceUtils.getBalance(PayzActivity.this);
+        int amount = Integer.parseInt(payz.getAmount());
+
+        if (balance > amount) {
+            // display confirmation
+            if (NetworkUtil.isAvailableNetwork(this)) {
+                displayInformationMessageDialog("Please confirm your payment of $" + payz.getAmount());
+            } else {
+                displayMessageDialog("ERROR", "No network connection");
+            }
         } else {
-            displayMessageDialog("#ERROR", "No network connection");
+            displayMessageDialog("Low balance", "You don't have enough balance to do transaction, please topup your account first");
         }
+
     }
 
     private void doPut(Senz senz) {
