@@ -132,14 +132,14 @@ public class PreferenceUtils {
         SharedPreferences.Editor editor = preferences.edit();
 
         // update balance
-        int balance = preferences.getInt("BALANCE", 50);
+        int balance = preferences.getInt("BALANCE", 70);
         editor.putInt("BALANCE", balance + amount);
         editor.commit();
     }
 
     public static int getBalance(Context context) {
         SharedPreferences preferences = context.getSharedPreferences(context.getString(R.string.preference_file_key), Context.MODE_PRIVATE);
-        int balance = preferences.getInt("BALANCE", 50);
+        int balance = preferences.getInt("BALANCE", 70);
 
         return balance;
     }
